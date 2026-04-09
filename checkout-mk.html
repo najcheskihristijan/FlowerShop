@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Checkout — Flowers & Coffee Prilep</title>
+<title>Плаќање — Flowers & Coffee Прилеп</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -473,8 +473,8 @@ button { cursor: pointer; border: none; font-family: inherit; }
 
 <!-- Header -->
 <div class="header">
-  <a href="index.html" class="logo">flowers <span>&</span> coffee</a>
-  <a href="index.html" class="back-link">&larr; Continue Shopping</a>
+  <a href="index-mk.html" class="logo">flowers <span>&</span> coffee</a>
+  <a href="index-mk.html" class="back-link">&larr; Продолжи со купување</a>
 </div>
 
 <!-- Checkout Content -->
@@ -482,102 +482,102 @@ button { cursor: pointer; border: none; font-family: inherit; }
 
   <!-- LEFT: Delivery Form -->
   <div class="delivery-form" id="deliveryForm">
-    <h2 class="section-title">Delivery Details</h2>
+    <h2 class="section-title">Детали за достава</h2>
 
-    <div class="form-section-label">Your Information (Sender)</div>
+    <div class="form-section-label">Твои информации (испраќач)</div>
 
     <div class="form-row">
       <div class="form-group">
-        <label>Your Name <span class="required">*</span></label>
-        <input type="text" id="senderName" placeholder="Your full name" required>
+        <label>Твое име <span class="required">*</span></label>
+        <input type="text" id="senderName" placeholder="Име и презиме" required>
       </div>
       <div class="form-group">
-        <label>Your Email <span class="required">*</span></label>
-        <input type="email" id="senderEmail" placeholder="your@email.com" required>
+        <label>Твој е-маил <span class="required">*</span></label>
+        <input type="email" id="senderEmail" placeholder="tvoj@email.com" required>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group">
-        <label>Your Phone / WhatsApp</label>
+        <label>Твој телефон / WhatsApp</label>
         <input type="tel" id="senderPhone" placeholder="+1 555 123 4567">
-        <div class="form-note">For delivery updates and photo confirmation</div>
+        <div class="form-note">За известувања за доставата и фото потврда</div>
       </div>
       <div class="form-group">
-        <label>Your Country</label>
+        <label>Твоја држава</label>
         <select id="senderCountry">
-          <option value="">Select country</option>
-          <option value="US">United States</option>
-          <option value="AU">Australia</option>
-          <option value="DE">Germany</option>
-          <option value="CH">Switzerland</option>
-          <option value="GB">United Kingdom</option>
-          <option value="IT">Italy</option>
-          <option value="MK">North Macedonia</option>
-          <option value="OTHER">Other</option>
+          <option value="">Избери држава</option>
+          <option value="US">САД</option>
+          <option value="AU">Австралија</option>
+          <option value="DE">Германија</option>
+          <option value="CH">Швајцарија</option>
+          <option value="GB">Велика Британија</option>
+          <option value="IT">Италија</option>
+          <option value="MK">Северна Македонија</option>
+          <option value="OTHER">Друга</option>
         </select>
       </div>
     </div>
 
-    <div class="form-section-label">Recipient in Prilep</div>
+    <div class="form-section-label">Примач во Прилеп</div>
 
     <div class="form-row">
       <div class="form-group">
-        <label>Recipient Name <span class="required">*</span></label>
-        <input type="text" id="recipientName" placeholder="Full name of person receiving flowers" required>
+        <label>Име на примач <span class="required">*</span></label>
+        <input type="text" id="recipientName" placeholder="Целосно име на лицето кое ги прима цвеќињата" required>
       </div>
       <div class="form-group">
-        <label>Recipient Phone <span class="required">*</span></label>
+        <label>Телефон на примач <span class="required">*</span></label>
         <input type="tel" id="recipientPhone" placeholder="+389 7X XXX XXX" required>
-        <div class="form-note">So we can coordinate delivery</div>
+        <div class="form-note">За координација на доставата</div>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group full">
-        <label>Delivery Address in Prilep <span class="required">*</span></label>
-        <input type="text" id="recipientAddress" placeholder="Street name, number, neighborhood" required>
+        <label>Адреса за достава во Прилеп <span class="required">*</span></label>
+        <input type="text" id="recipientAddress" placeholder="Улица, број, населба" required>
       </div>
     </div>
 
-    <div class="form-section-label">Delivery Preference</div>
+    <div class="form-section-label">Преференции за достава</div>
 
     <div class="delivery-options">
       <label class="delivery-option selected" onclick="selectDelivery(this, 'today')">
         <input type="radio" name="delivery" value="today" checked>
-        <h4>Same Day</h4>
-        <p>Order before 12:00 PM</p>
-        <div class="delivery-price">Free over 1,500 MKD</div>
+        <h4>Ист ден</h4>
+        <p>Нарачај пред 12:00</p>
+        <div class="delivery-price">Бесплатно над 1.500 ден.</div>
       </label>
       <label class="delivery-option" onclick="selectDelivery(this, 'scheduled')">
         <input type="radio" name="delivery" value="scheduled">
-        <h4>Choose a Date</h4>
-        <p>Pick a specific day</p>
-        <div class="delivery-price">Free over 1,500 MKD</div>
+        <h4>Избери датум</h4>
+        <p>Одбери конкретен ден</p>
+        <div class="delivery-price">Бесплатно над 1.500 ден.</div>
       </label>
     </div>
 
     <div class="form-row" id="dateRow" style="display:none;">
       <div class="form-group full">
-        <label>Preferred Delivery Date <span class="required">*</span></label>
+        <label>Посакуван датум за достава <span class="required">*</span></label>
         <input type="date" id="deliveryDate" min="">
       </div>
     </div>
 
-    <div class="form-section-label">Personal Touch</div>
+    <div class="form-section-label">Личен допир</div>
 
     <div class="form-row">
       <div class="form-group full">
-        <label>Message for the Card</label>
-        <textarea id="cardMessage" placeholder="Write a personal message to include with the flowers (optional)" maxlength="300"></textarea>
-        <div class="form-note"><span id="charCount">0</span>/300 characters</div>
+        <label>Порака за картичката</label>
+        <textarea id="cardMessage" placeholder="Напиши лична порака која ќе биде вклучена со цвеќињата (опционално)" maxlength="300"></textarea>
+        <div class="form-note"><span id="charCount">0</span>/300 карактери</div>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group full">
-        <label>Special Instructions</label>
-        <input type="text" id="specialInstructions" placeholder="Any special requests? (e.g., surprise delivery, call before arriving)">
+        <label>Специјални инструкции</label>
+        <input type="text" id="specialInstructions" placeholder="Посебни барања? (пр. изненадување, јавете се пред доставата)">
       </div>
     </div>
   </div>
@@ -585,33 +585,33 @@ button { cursor: pointer; border: none; font-family: inherit; }
   <!-- RIGHT: Order Summary + PayPal -->
   <div class="order-summary">
     <div class="summary-card">
-      <h2 class="section-title">Order Summary</h2>
+      <h2 class="section-title">Преглед на нарачка</h2>
 
       <div class="summary-items" id="summaryItems">
         <!-- Filled by JS -->
       </div>
 
       <div class="summary-line">
-        <span>Subtotal</span>
+        <span>Меѓузбир</span>
         <span id="subtotal">0 EUR</span>
       </div>
       <div class="summary-line">
-        <span>Delivery</span>
-        <span id="deliveryFee">Free</span>
+        <span>Достава</span>
+        <span id="deliveryFee">Бесплатно</span>
       </div>
       <div class="summary-line total">
-        <span>Total</span>
+        <span>Вкупно</span>
         <span class="price" id="totalPrice">0 EUR</span>
       </div>
 
       <!-- PayPal -->
       <div class="paypal-section">
         <div class="paypal-sandbox-badge">
-          SANDBOX MODE — No real money will be charged. This is a test environment.
+          ТЕСТ РЕЖИМ — Нема да се наплатат вистински пари. Ова е тест околина.
         </div>
-        <h3>Pay with PayPal</h3>
+        <h3>Плати со PayPal</h3>
         <div id="paypal-button-container"></div>
-        <p class="paypal-note">You'll be redirected to PayPal to complete payment securely. Prices shown in EUR.</p>
+        <p class="paypal-note">Ќе бидете пренасочени на PayPal за безбедно плаќање. Цените се прикажани во EUR.</p>
       </div>
     </div>
   </div>
@@ -621,23 +621,23 @@ button { cursor: pointer; border: none; font-family: inherit; }
 <!-- Confirmation (hidden until payment) -->
 <div class="confirmation" id="confirmation">
   <div class="confirmation-icon">&#10003;</div>
-  <h2>Thank you for your order!</h2>
-  <p>We've received your order and will start preparing your bouquet right away.</p>
-  <p>We'll send you a <strong>photo confirmation</strong> via WhatsApp/email when it's delivered.</p>
-  <div class="order-id" id="orderId">Order #FC-000000</div>
-  <p style="margin-top:1rem;font-size:0.9rem;">A confirmation email has been sent to <strong id="confirmEmail"></strong></p>
-  <a href="index.html" class="btn btn-pink">Back to Shop</a>
+  <h2>Ви благодариме за нарачката!</h2>
+  <p>Ја примивме вашата нарачка и веднаш почнуваме со подготовка на букетот.</p>
+  <p>Ќе ви испратиме <strong>фото потврда</strong> преку WhatsApp/е-маил кога ќе биде доставено.</p>
+  <div class="order-id" id="orderId">Нарачка #FC-000000</div>
+  <p style="margin-top:1rem;font-size:0.9rem;">Потврда е испратена на <strong id="confirmEmail"></strong></p>
+  <a href="index-mk.html" class="btn btn-pink">Назад кон продавница</a>
 </div>
 
 <!-- Empty Cart State -->
 <div class="empty-cart" id="emptyCart" style="display:none;">
-  <h2>Your cart is empty</h2>
-  <p>Add some beautiful bouquets before checking out.</p>
-  <a href="index.html" class="btn btn-pink">Browse Bouquets</a>
+  <h2>Кошничката е празна</h2>
+  <p>Додадете убави букети пред да продолжите со плаќање.</p>
+  <a href="index-mk.html" class="btn btn-pink">Разгледај букети</a>
 </div>
 
 <div class="checkout-footer">
-  Flowers & Coffee &mdash; Prilep, North Macedonia &mdash; Secure checkout powered by PayPal
+  Flowers & Coffee &mdash; Прилеп, Северна Македонија &mdash; Безбедно плаќање преку PayPal
 </div>
 
 <!-- PayPal SDK (Sandbox mode, EUR currency) -->
@@ -701,7 +701,7 @@ function renderSummary() {
         <div class="summary-item-color" style="background:${p.color}"></div>
         <div class="summary-item-details">
           <div class="summary-item-name">${p.name}</div>
-          <div class="summary-item-meta">Qty: ${item.qty}</div>
+          <div class="summary-item-meta">Кол: ${item.qty}</div>
         </div>
         <div class="summary-item-price">${(p.priceEUR * item.qty).toFixed(2)} EUR</div>
       </div>
@@ -712,7 +712,7 @@ function renderSummary() {
   const fee = getDeliveryFee();
 
   document.getElementById('subtotal').textContent = subtotal.toFixed(2) + ' EUR';
-  document.getElementById('deliveryFee').textContent = fee === 0 ? 'Free' : fee.toFixed(2) + ' EUR';
+  document.getElementById('deliveryFee').textContent = fee === 0 ? 'Бесплатно' : fee.toFixed(2) + ' EUR';
   document.getElementById('totalPrice').textContent = getTotal().toFixed(2) + ' EUR';
 }
 
@@ -826,7 +826,7 @@ function initPayPal() {
     // Called when user clicks PayPal button
     onClick: function(data, actions) {
       if (!validateForm()) {
-        alert('Please fill in all required fields before proceeding to payment.');
+        alert('Ве молиме пополнете ги сите задолжителни полиња пред да продолжите со плаќање.');
         return actions.reject();
       }
       return actions.resolve();
@@ -887,7 +887,7 @@ function initPayPal() {
         // Show confirmation
         document.getElementById('checkoutContent').style.display = 'none';
         document.getElementById('confirmation').classList.add('show');
-        document.getElementById('orderId').textContent = 'Order #' + orderId;
+        document.getElementById('orderId').textContent = 'Нарачка #' + orderId;
         document.getElementById('confirmEmail').textContent = orderData.sender.email;
 
         // Clear cart
@@ -905,7 +905,7 @@ function initPayPal() {
     // Handle errors
     onError: function(err) {
       console.error('PayPal error:', err);
-      alert('Something went wrong with the payment. Please try again.');
+      alert('Нешто тргна наопаку со плаќањето. Ве молиме обидете се повторно.');
     },
 
     // Handle cancellation
