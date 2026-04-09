@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flower Market Research — Prilep & Macedonia</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --rose: #c4566a;
+    --rose-light: #f5e1e5;
+    --rose-dark: #8c2d3e;
+    --sage: #7a9e7e;
+    --sage-light: #e8f0e9;
+    --cream: #faf7f2;
+    --warm-white: #fffdf9;
+    --text: #2d2926;
+    --text-light: #6b6560;
+    --border: #e8e2dc;
+    --gold: #c49a3c;
+    --gold-light: #faf3e0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--rose-dark) 0%, var(--rose) 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+  }
+
+  .header p {
+    font-size: 1rem;
+    opacity: 0.85;
+    font-weight: 300;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .section {
+    background: var(--warm-white);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+  }
+
+  .section h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--rose-dark);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--rose-light);
+  }
+
+  .section h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 1.25rem 0 0.75rem 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0 1.25rem 0;
+    font-size: 0.9rem;
+  }
+
+  thead th {
+    background: var(--rose-light);
+    color: var(--rose-dark);
+    font-weight: 600;
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  thead th:first-child { border-radius: 6px 0 0 0; }
+  thead th:last-child { border-radius: 0 6px 0 0; }
+
+  tbody td {
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr:hover { background: var(--cream); }
+  tbody tr:last-child td { border-bottom: none; }
+
+  .tag {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .tag-yes { background: var(--sage-light); color: var(--sage); }
+  .tag-no { background: #fde8e8; color: #c44; }
+  .tag-partial { background: var(--gold-light); color: var(--gold); }
+  .tag-unknown { background: #f0f0f0; color: #888; }
+
+  .insight-box {
+    background: var(--gold-light);
+    border-left: 4px solid var(--gold);
+    padding: 1rem 1.25rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+
+  .insight-box strong { color: var(--gold); }
+
+  .gap-box {
+    background: var(--sage-light);
+    border-left: 4px solid var(--sage);
+    padding: 1rem 1.25rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+
+  .gap-box strong { color: #4a7a4e; }
+
+  .competitor-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+
+  .card h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--rose-dark);
+  }
+
+  .card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+  }
+
+  .card .meta {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .stat .number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--rose);
+  }
+
+  .stat .label {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.25rem;
+  }
+
+  .occasions-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .occasions-list li {
+    background: var(--cream);
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    border: 1px solid var(--border);
+  }
+
+  .occasions-list li strong {
+    color: var(--rose-dark);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-light);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.6rem; }
+    .container { padding: 1rem; }
+    .section { padding: 1.25rem; }
+    table { font-size: 0.8rem; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Flower Market Research</h1>
+  <p>Prilep & Macedonia — April 2026</p>
+</div>
+
+<div class="container">
+
+  <!-- Key Stats -->
+  <div class="stats-row">
+    <div class="stat">
+      <div class="number">23</div>
+      <div class="label">Flower shops in Prilep</div>
+    </div>
+    <div class="stat">
+      <div class="number">0</div>
+      <div class="label">With e-commerce websites</div>
+    </div>
+    <div class="stat">
+      <div class="number">0</div>
+      <div class="label">With online payments</div>
+    </div>
+    <div class="stat">
+      <div class="number">~66K</div>
+      <div class="label">Prilep population</div>
+    </div>
+  </div>
+
+  <!-- Pricing Section -->
+  <div class="section">
+    <h2>Flower Prices in Macedonia (Retail)</h2>
+
+    <h3>Single Flowers</h3>
+    <table>
+      <thead>
+        <tr><th>Flower</th><th>Regular Price</th><th>Holiday Price</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Single Rose (red)</td><td>120–150 MKD (~2–2.50 EUR)</td><td>200–250 MKD (~3.25–4 EUR)</td></tr>
+        <tr><td>Single Carnation</td><td>50–60 MKD (~0.80–1 EUR)</td><td>70–100 MKD (~1.15–1.60 EUR)</td></tr>
+        <tr><td>Single Gerbera (decorated)</td><td>~750 MKD (~12 EUR)</td><td>Similar</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Rose Bouquets</h3>
+    <table>
+      <thead>
+        <tr><th>Product</th><th>Price (MKD)</th><th>Price (EUR)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Single rose in paper</td><td>250</td><td>~4</td></tr>
+        <tr><td>Rose in box</td><td>850</td><td>~14</td></tr>
+        <tr><td>3 roses in box</td><td>1,150</td><td>~19</td></tr>
+        <tr><td>5 roses in box</td><td>1,450–1,500</td><td>~24</td></tr>
+        <tr><td>Bouquet — small</td><td>900–1,400</td><td>~15–23</td></tr>
+        <tr><td>Bouquet — medium</td><td>1,400–2,500</td><td>~23–41</td></tr>
+        <tr><td>11 red roses</td><td>1,200</td><td>~20</td></tr>
+        <tr><td>21 red roses</td><td>2,300</td><td>~37</td></tr>
+        <tr><td>51 red roses</td><td>5,500</td><td>~90</td></tr>
+        <tr><td>101 red roses</td><td>11,000–21,000</td><td>~180–340</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Mixed Bouquets & Arrangements</h3>
+    <table>
+      <thead>
+        <tr><th>Tier</th><th>Price (MKD)</th><th>Price (EUR)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Basic (supermarket level)</td><td>from 500</td><td>~8</td></tr>
+        <tr><td>Simple arrangement</td><td>950–1,100</td><td>~15–18</td></tr>
+        <tr><td>Mid-range bouquet</td><td>1,600–2,800</td><td>~26–46</td></tr>
+        <tr><td>Premium bouquet</td><td>4,000–6,000</td><td>~65–98</td></tr>
+        <tr><td>Luxury arrangements</td><td>7,000–12,900</td><td>~114–210</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Potted Plants</h3>
+    <table>
+      <thead>
+        <tr><th>Plant</th><th>Price (MKD)</th><th>Price (EUR)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Hyacinth</td><td>120</td><td>~2</td></tr>
+        <tr><td>Succulent</td><td>550</td><td>~9</td></tr>
+        <tr><td>Kalanchoe</td><td>800</td><td>~13</td></tr>
+        <tr><td>Orchid (single stem)</td><td>1,050</td><td>~17</td></tr>
+        <tr><td>Orchid (two stems)</td><td>1,450</td><td>~24</td></tr>
+        <tr><td>Monstera Deliciosa</td><td>1,500</td><td>~24</td></tr>
+        <tr><td>Spathiphyllum (S–L)</td><td>650–2,700</td><td>~11–44</td></tr>
+      </tbody>
+    </table>
+
+    <div class="insight-box">
+      <strong>Key insight:</strong> Price sensitivity is high — many buyers purchase just a single rose. Supermarkets (Vero, Tinex) sell basic bouquets from 250–500 MKD, competing at the low end. Holiday periods see 60–80% price inflation on roses.
+    </div>
+  </div>
+
+  <!-- Prilep Competitors -->
+  <div class="section">
+    <h2>Flower Shops in Prilep — Competitive Landscape</h2>
+
+    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+      23 flower shops serve Prilep's ~66,000 population (1 shop per ~2,900 residents). Most are small, traditional, cash-only operations. Only 2 have meaningful social media presence.
+    </p>
+
+    <div class="competitor-card">
+      <div class="card">
+        <h4>Гардениа (Gardenia)</h4>
+        <p>Бракја Ламески 17</p>
+        <p>078 520 645</p>
+        <div class="meta">
+          <span class="tag tag-yes">Facebook (16.6K likes)</span>
+          <span style="font-size:0.8rem; color: var(--text-light); margin-left: 0.5rem;">Strongest online presence in Prilep</span>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Тиара Флавер (Tiara Flower)</h4>
+        <p>Александар Македонски 453</p>
+        <p>078 989 788</p>
+        <div class="meta">
+          <span class="tag tag-yes">Facebook</span>
+          <span class="tag tag-yes">Instagram</span>
+          <span style="font-size:0.8rem; color: var(--text-light); margin-left: 0.5rem;">Posts prices on social</span>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Протеа (Protea)</h4>
+        <p>бул. Гоце Делчев 3</p>
+        <p>075 735 233</p>
+        <div class="meta">
+          <span class="tag tag-partial">Facebook only</span>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Јасмин (Jasmin)</h4>
+        <p>Address unknown</p>
+        <div class="meta">
+          <span class="tag tag-partial">Facebook only</span>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Клементина (Klementina)</h4>
+        <p>Караорман 30</p>
+        <div class="meta">
+          <span class="tag tag-no">No social media</span>
+          <span style="font-size:0.8rem; color: var(--text-light); margin-left: 0.5rem;">Operating since 2007</span>
+        </div>
+      </div>
+      <div class="card">
+        <h4>+ 18 more shops</h4>
+        <p>Magnolia, Special Event, Dalija, Chameleon, Lilija, Frezija, Mimi, Diva, Bela, and others</p>
+        <div class="meta">
+          <span class="tag tag-no">No online presence</span>
+          <span style="font-size:0.8rem; color: var(--text-light); margin-left: 0.5rem;">Cash only, walk-in only</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-box">
+      <strong>Market gap:</strong> Zero Prilep flower shops have an e-commerce website, online ordering, international payment processing, or structured delivery. This is the core opportunity.
+    </div>
+  </div>
+
+  <!-- Online Delivery Services -->
+  <div class="section">
+    <h2>Online Flower Delivery — Macedonia</h2>
+
+    <h3>Domestic Online Shops</h3>
+    <table>
+      <thead>
+        <tr><th>Service</th><th>Delivers to Prilep?</th><th>Price Range</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>City Flowers</strong><br><small style="color:var(--text-light)">cityflowers.mk</small></td>
+          <td><span class="tag tag-partial">By arrangement</span></td>
+          <td>1,950–21,000 MKD</td>
+          <td>Macedonia's first online flower store. Free Skopje delivery. Other cities via email only.</td>
+        </tr>
+        <tr>
+          <td><strong>Podari.mk</strong></td>
+          <td><span class="tag tag-yes">Nationwide</span></td>
+          <td>250–17,000 MKD</td>
+          <td>Gift platform with flower section. Best online pricing data available.</td>
+        </tr>
+        <tr>
+          <td><strong>Fancy Marriage</strong><br><small style="color:var(--text-light)">fancymarriage.mk</small></td>
+          <td><span class="tag tag-partial">By arrangement</span></td>
+          <td>1,600–51,000 MKD</td>
+          <td>Wedding specialist. Bridal bouquets, event flowers.</td>
+        </tr>
+        <tr>
+          <td><strong>Cvekara Bloom</strong><br><small style="color:var(--text-light)">cvekarabloom.mk</small></td>
+          <td><span class="tag tag-unknown">Unknown</span></td>
+          <td>Various</td>
+          <td>Skopje-based, WordPress site.</td>
+        </tr>
+        <tr>
+          <td><strong>Ex.mk (Exquisite)</strong></td>
+          <td><span class="tag tag-yes">Nationwide</span></td>
+          <td>4,000–21,000 MKD</td>
+          <td>Multi-category gift store with flower section.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>International Services Delivering to Prilep</h3>
+    <table>
+      <thead>
+        <tr><th>Service</th><th>Prilep Delivery</th><th>Currency</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Flora2000</strong></td>
+          <td><span class="tag tag-yes">Yes</span></td>
+          <td>USD / EUR</td>
+          <td>International — uses local partner florists</td>
+        </tr>
+        <tr>
+          <td><strong>Flowers4Macedonia</strong></td>
+          <td><span class="tag tag-yes">Yes</span></td>
+          <td>Multiple</td>
+          <td>Same-day in most cities. Part of Internet Florist network.</td>
+        </tr>
+        <tr>
+          <td><strong>Cyber-Florist</strong></td>
+          <td><span class="tag tag-yes">Yes</span></td>
+          <td>USD</td>
+          <td>International with local fulfillment</td>
+        </tr>
+        <tr>
+          <td><strong>FloraQueen</strong></td>
+          <td><span class="tag tag-yes">Yes</span></td>
+          <td>EUR</td>
+          <td>European delivery network</td>
+        </tr>
+        <tr>
+          <td><strong>Interflora</strong></td>
+          <td><span class="tag tag-yes">Yes</span></td>
+          <td>GBP / EUR</td>
+          <td>Global network</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="insight-box">
+      <strong>Opportunity:</strong> International services deliver to Prilep but use anonymous local partners, with no brand relationship or reliability guarantee. A local shop with its own online presence can offer better prices, real photos of actual bouquets, and direct communication — cutting out the middleman entirely.
+    </div>
+  </div>
+
+  <!-- Wholesale Sourcing -->
+  <div class="section">
+    <h2>Flower Sourcing & Wholesale</h2>
+
+    <h3>Primary Wholesale Supplier</h3>
+    <div class="card" style="margin: 1rem 0;">
+      <h4>Sardoniks SD</h4>
+      <p>One of the largest flower importers in Macedonia</p>
+      <p>Weekly imports from the Aalsmeer flower auction (Netherlands)</p>
+      <p style="margin-top:0.5rem; font-size:0.85rem; color: var(--text-light);">
+        The Aalsmeer auction sources from Colombia, Ecuador, Kenya, Israel, Turkey, and other growing regions. This is the standard supply chain for most Macedonian florists.
+      </p>
+      <div class="meta">
+        <a href="https://sardoniks.mk" style="color: var(--rose); text-decoration: none;">sardoniks.mk</a>
+      </div>
+    </div>
+
+    <h3>Other Sourcing Options</h3>
+    <table>
+      <thead>
+        <tr><th>Source</th><th>Type</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Skopski Pazar (Green Market)</strong></td>
+          <td>Retail / small wholesale</td>
+          <td>Flower vendors among ~2,700 sales points. Good for small supplementary purchases.</td>
+        </tr>
+        <tr>
+          <td><strong>Garden Center Ristovi</strong></td>
+          <td>Potted plants / greenery</td>
+          <td>Domestic production — wholesale and retail. Good for potted plant inventory.</td>
+        </tr>
+        <tr>
+          <td><strong>Street vendors</strong></td>
+          <td>Seasonal / holiday</td>
+          <td>Lower prices, especially during 8 March and Valentine's Day.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="insight-box">
+      <strong>Supply chain:</strong> Nearly all cut flowers in Macedonia are imported via Netherlands. Sourcing through Sardoniks (or similar importers) is the standard approach. Expect 2x/week Skopje runs (1.5h each way) for restocking.
+    </div>
+  </div>
+
+  <!-- Key Occasions -->
+  <div class="section">
+    <h2>Peak Sales Periods & Popular Flowers</h2>
+
+    <h3>Key Occasions (by Revenue Impact)</h3>
+    <ul class="occasions-list">
+      <li><strong>8 March — Women's Day</strong> — Biggest flower day in MK. 5–10x normal sales. Roses & carnations.</li>
+      <li><strong>14 Feb — Valentine's Day</strong> — 3–5x normal. Red roses dominate.</li>
+      <li><strong>Mother's Day</strong> — 3–5x normal. Mixed bouquets popular.</li>
+      <li><strong>Name Days (Именден)</strong> — Steady demand year-round. Culturally very important.</li>
+      <li><strong>Easter (Велигден)</strong> — 2–3x normal. Spring flowers.</li>
+      <li><strong>Wedding Season (Jun–Sep)</strong> — Sustained uplift. Bride bouquets + venue decoration.</li>
+      <li><strong>New Year / Christmas</strong> — 2x normal. Arrangements & potted plants.</li>
+      <li><strong>Funerals</strong> — Year-round baseline. Wreaths & arrangements.</li>
+    </ul>
+
+    <h3>Most Popular Flower Types</h3>
+    <table>
+      <thead>
+        <tr><th>Flower</th><th>Popularity</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Roses</td><td>Most popular</td><td>Most expensive. Red = top seller for romantic occasions.</td></tr>
+        <tr><td>Carnations</td><td>Very popular</td><td>Budget-friendly. Staple for 8 March.</td></tr>
+        <tr><td>Orchids</td><td>Popular (potted)</td><td>Long-lasting gift option. Growing demand.</td></tr>
+        <tr><td>Tulips</td><td>Seasonal</td><td>Spring demand.</td></tr>
+        <tr><td>Gerberas</td><td>Common</td><td>Mixed bouquet staple.</td></tr>
+        <tr><td>Lilies</td><td>Premium</td><td>Premium bouquet ingredient.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="insight-box">
+      <strong>Consumer note:</strong> "Eternal roses" (preserved roses in boxes) are gaining popularity as a premium gift — higher margins and zero spoilage risk. Worth considering for the product lineup.
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="section" style="border: 2px solid var(--sage); background: var(--sage-light);">
+    <h2 style="color: #4a7a4e; border-bottom-color: #b8d4ba;">Key Takeaways</h2>
+    <ol style="padding-left: 1.25rem; font-size: 0.95rem; line-height: 2;">
+      <li><strong>23 flower shops in Prilep, zero with online ordering or e-commerce</strong> — wide open digital gap</li>
+      <li><strong>International delivery services already serve Prilep</strong> — but via anonymous local partners with no transparency. A branded local shop can undercut them on price and beat them on trust.</li>
+      <li><strong>Typical bouquet range: 900–2,500 MKD (EUR 15–40)</strong> — this is the sweet spot for everyday orders</li>
+      <li><strong>8 March is the Super Bowl of flowers in MK</strong> — plan inventory and marketing around it heavily</li>
+      <li><strong>Sardoniks SD is the main wholesale supplier</strong> — imported from Dutch auction, standard for all MK florists</li>
+      <li><strong>Price sensitivity is real</strong> — many customers buy a single rose. The Coffee 2 Go combo (250–400 MKD) hits the right impulse-buy price point.</li>
+      <li><strong>Gardenia is the only competitor with serious Facebook presence</strong> (16.6K likes) — but no website, no online ordering, no payments</li>
+    </ol>
+  </div>
+
+</div>
+
+<div class="footer">
+  Flower Shop Market Research — Prilep, Macedonia — April 2026
+</div>
+
+</body>
+</html>

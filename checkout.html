@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Flowers & Coffee Prilep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #faf6f1;
+  --cream-dark: #f3ece3;
+  --white: #ffffff;
+  --pink: #d4637a;
+  --pink-hover: #c04e65;
+  --pink-light: #fce8ed;
+  --pink-pale: #fdf2f5;
+  --green: #6b8f71;
+  --green-light: #e9f0ea;
+  --text-dark: #1a1a1a;
+  --text: #333333;
+  --text-light: #777777;
+  --text-lighter: #aaaaaa;
+  --border: #e8e2db;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+  --radius: 4px;
+  --transition: all 0.3s ease;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; font-family: inherit; }
+
+/* ---- Header ---- */
+.header {
+  background: var(--white);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.logo span { color: var(--pink); }
+
+.back-link {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  transition: var(--transition);
+}
+
+.back-link:hover { color: var(--pink); }
+
+/* ---- Main Layout ---- */
+.checkout-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2.5rem;
+  min-height: calc(100vh - 150px);
+}
+
+/* ---- Sections ---- */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--pink-light);
+}
+
+/* ---- Delivery Form ---- */
+.delivery-form {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid var(--border);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.form-group label .required {
+  color: var(--pink);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--white);
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px rgba(212, 99, 122, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-section-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--pink);
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.form-section-label:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.form-note {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+/* ---- Delivery Options ---- */
+.delivery-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.delivery-option {
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.delivery-option:hover {
+  border-color: var(--pink);
+}
+
+.delivery-option.selected {
+  border-color: var(--pink);
+  background: var(--pink-pale);
+}
+
+.delivery-option input { display: none; }
+
+.delivery-option h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.delivery-option p {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.delivery-option .delivery-price {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--pink);
+  margin-top: 0.35rem;
+}
+
+/* ---- Order Summary ---- */
+.order-summary {
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+}
+
+.summary-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid var(--border);
+}
+
+.summary-items {
+  margin-bottom: 1.5rem;
+}
+
+.summary-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+
+.summary-item:last-child { border-bottom: none; }
+
+.summary-item-color {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.summary-item-details {
+  flex: 1;
+}
+
+.summary-item-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.summary-item-meta {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.summary-item-price {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+}
+
+.summary-line.total {
+  border-top: 2px solid var(--border);
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.summary-line.total .price { color: var(--pink); }
+
+/* ---- PayPal Button Area ---- */
+.paypal-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.paypal-section h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+#paypal-button-container {
+  min-height: 55px;
+}
+
+.paypal-note {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-lighter);
+  margin-top: 0.75rem;
+}
+
+.paypal-sandbox-badge {
+  background: #fef3cd;
+  border: 1px solid #ffc107;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  font-size: 0.8rem;
+  color: #856404;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* ---- Form Validation ---- */
+.form-group input.error,
+.form-group textarea.error {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.error-msg {
+  color: #dc3545;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  display: none;
+}
+
+.error-msg.show { display: block; }
+
+/* ---- Confirmation ---- */
+.confirmation {
+  display: none;
+  text-align: center;
+  padding: 3rem 2rem;
+  grid-column: 1 / -1;
+}
+
+.confirmation.show { display: block; }
+
+.confirmation-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--green-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2.5rem;
+  color: var(--green);
+}
+
+.confirmation h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.confirmation p {
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.confirmation .order-id {
+  font-family: monospace;
+  background: var(--cream-dark);
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+.confirmation .btn {
+  margin-top: 1.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.btn-pink {
+  background: var(--pink);
+  color: white;
+}
+
+.btn-pink:hover {
+  background: var(--pink-hover);
+}
+
+/* ---- Empty Cart State ---- */
+.empty-cart {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.empty-cart h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.empty-cart p {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+/* ---- Footer ---- */
+.checkout-footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.8rem;
+  color: var(--text-lighter);
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .checkout-page {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+  .order-summary { position: static; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <a href="index.html" class="logo">flowers <span>&</span> coffee</a>
+  <a href="index.html" class="back-link">&larr; Continue Shopping</a>
+</div>
+
+<!-- Checkout Content -->
+<div class="checkout-page" id="checkoutContent">
+
+  <!-- LEFT: Delivery Form -->
+  <div class="delivery-form" id="deliveryForm">
+    <h2 class="section-title">Delivery Details</h2>
+
+    <div class="form-section-label">Your Information (Sender)</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Your Name <span class="required">*</span></label>
+        <input type="text" id="senderName" placeholder="Your full name" required>
+      </div>
+      <div class="form-group">
+        <label>Your Email <span class="required">*</span></label>
+        <input type="email" id="senderEmail" placeholder="your@email.com" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Your Phone / WhatsApp</label>
+        <input type="tel" id="senderPhone" placeholder="+1 555 123 4567">
+        <div class="form-note">For delivery updates and photo confirmation</div>
+      </div>
+      <div class="form-group">
+        <label>Your Country</label>
+        <select id="senderCountry">
+          <option value="">Select country</option>
+          <option value="US">United States</option>
+          <option value="AU">Australia</option>
+          <option value="DE">Germany</option>
+          <option value="CH">Switzerland</option>
+          <option value="GB">United Kingdom</option>
+          <option value="IT">Italy</option>
+          <option value="MK">North Macedonia</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-section-label">Recipient in Prilep</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Recipient Name <span class="required">*</span></label>
+        <input type="text" id="recipientName" placeholder="Full name of person receiving flowers" required>
+      </div>
+      <div class="form-group">
+        <label>Recipient Phone <span class="required">*</span></label>
+        <input type="tel" id="recipientPhone" placeholder="+389 7X XXX XXX" required>
+        <div class="form-note">So we can coordinate delivery</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group full">
+        <label>Delivery Address in Prilep <span class="required">*</span></label>
+        <input type="text" id="recipientAddress" placeholder="Street name, number, neighborhood" required>
+      </div>
+    </div>
+
+    <div class="form-section-label">Delivery Preference</div>
+
+    <div class="delivery-options">
+      <label class="delivery-option selected" onclick="selectDelivery(this, 'today')">
+        <input type="radio" name="delivery" value="today" checked>
+        <h4>Same Day</h4>
+        <p>Order before 12:00 PM</p>
+        <div class="delivery-price">Free over 1,500 MKD</div>
+      </label>
+      <label class="delivery-option" onclick="selectDelivery(this, 'scheduled')">
+        <input type="radio" name="delivery" value="scheduled">
+        <h4>Choose a Date</h4>
+        <p>Pick a specific day</p>
+        <div class="delivery-price">Free over 1,500 MKD</div>
+      </label>
+    </div>
+
+    <div class="form-row" id="dateRow" style="display:none;">
+      <div class="form-group full">
+        <label>Preferred Delivery Date <span class="required">*</span></label>
+        <input type="date" id="deliveryDate" min="">
+      </div>
+    </div>
+
+    <div class="form-section-label">Personal Touch</div>
+
+    <div class="form-row">
+      <div class="form-group full">
+        <label>Message for the Card</label>
+        <textarea id="cardMessage" placeholder="Write a personal message to include with the flowers (optional)" maxlength="300"></textarea>
+        <div class="form-note"><span id="charCount">0</span>/300 characters</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group full">
+        <label>Special Instructions</label>
+        <input type="text" id="specialInstructions" placeholder="Any special requests? (e.g., surprise delivery, call before arriving)">
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Order Summary + PayPal -->
+  <div class="order-summary">
+    <div class="summary-card">
+      <h2 class="section-title">Order Summary</h2>
+
+      <div class="summary-items" id="summaryItems">
+        <!-- Filled by JS -->
+      </div>
+
+      <div class="summary-line">
+        <span>Subtotal</span>
+        <span id="subtotal">0 EUR</span>
+      </div>
+      <div class="summary-line">
+        <span>Delivery</span>
+        <span id="deliveryFee">Free</span>
+      </div>
+      <div class="summary-line total">
+        <span>Total</span>
+        <span class="price" id="totalPrice">0 EUR</span>
+      </div>
+
+      <!-- PayPal -->
+      <div class="paypal-section">
+        <div class="paypal-sandbox-badge">
+          SANDBOX MODE — No real money will be charged. This is a test environment.
+        </div>
+        <h3>Pay with PayPal</h3>
+        <div id="paypal-button-container"></div>
+        <p class="paypal-note">You'll be redirected to PayPal to complete payment securely. Prices shown in EUR.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Confirmation (hidden until payment) -->
+<div class="confirmation" id="confirmation">
+  <div class="confirmation-icon">&#10003;</div>
+  <h2>Thank you for your order!</h2>
+  <p>We've received your order and will start preparing your bouquet right away.</p>
+  <p>We'll send you a <strong>photo confirmation</strong> via WhatsApp/email when it's delivered.</p>
+  <div class="order-id" id="orderId">Order #FC-000000</div>
+  <p style="margin-top:1rem;font-size:0.9rem;">A confirmation email has been sent to <strong id="confirmEmail"></strong></p>
+  <a href="index.html" class="btn btn-pink">Back to Shop</a>
+</div>
+
+<!-- Empty Cart State -->
+<div class="empty-cart" id="emptyCart" style="display:none;">
+  <h2>Your cart is empty</h2>
+  <p>Add some beautiful bouquets before checking out.</p>
+  <a href="index.html" class="btn btn-pink">Browse Bouquets</a>
+</div>
+
+<div class="checkout-footer">
+  Flowers & Coffee &mdash; Prilep, North Macedonia &mdash; Secure checkout powered by PayPal
+</div>
+
+<!-- PayPal SDK (Sandbox mode, EUR currency) -->
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR&intent=capture"></script>
+
+<script>
+/* ============================================
+   CHECKOUT — Product Data & Cart
+   ============================================ */
+
+const PRODUCTS = [
+  { id: 1,  name: "Single Rose (Wrapped)",       priceMKD: 250,   priceEUR: 4,   color: "#e8b4b4" },
+  { id: 2,  name: "Coffee + Mini Bouquet Combo",  priceMKD: 350,   priceEUR: 6,   color: "#ffc9a8" },
+  { id: 3,  name: "Small Mixed Bouquet",          priceMKD: 900,   priceEUR: 15,  color: "#b8d4bb" },
+  { id: 4,  name: "Rose Box (3 Roses)",           priceMKD: 1150,  priceEUR: 19,  color: "#f8bbd0" },
+  { id: 5,  name: "Classic Rose Bouquet (11)",     priceMKD: 1200,  priceEUR: 20,  color: "#d1bfe0" },
+  { id: 6,  name: "Seasonal Arrangement",         priceMKD: 1500,  priceEUR: 25,  color: "#ffe599" },
+  { id: 7,  name: "Rose Box (5 Roses)",           priceMKD: 1500,  priceEUR: 24,  color: "#e0b3c8" },
+  { id: 8,  name: "Grand Rose Bouquet (21)",      priceMKD: 2300,  priceEUR: 37,  color: "#ffb3a3" },
+  { id: 9,  name: "Premium Mixed Bouquet",        priceMKD: 2500,  priceEUR: 40,  color: "#c9d4a9" },
+  { id: 10, name: "Luxury Bouquet",               priceMKD: 4000,  priceEUR: 65,  color: "#d4a9a9" }
+];
+
+let cart = JSON.parse(localStorage.getItem('fc_cart') || '[]');
+const DELIVERY_FEE = 2; // EUR — waived over 25 EUR (~1500 MKD)
+const FREE_DELIVERY_THRESHOLD = 25;
+
+/* ============================================
+   RENDER ORDER SUMMARY
+   ============================================ */
+
+function getSubtotal() {
+  return cart.reduce((sum, item) => {
+    const p = PRODUCTS.find(x => x.id === item.id);
+    return sum + (p ? p.priceEUR * item.qty : 0);
+  }, 0);
+}
+
+function getDeliveryFee() {
+  return getSubtotal() >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE;
+}
+
+function getTotal() {
+  return getSubtotal() + getDeliveryFee();
+}
+
+function renderSummary() {
+  const container = document.getElementById('summaryItems');
+
+  if (cart.length === 0) {
+    document.getElementById('checkoutContent').style.display = 'none';
+    document.getElementById('emptyCart').style.display = 'block';
+    return;
+  }
+
+  container.innerHTML = cart.map(item => {
+    const p = PRODUCTS.find(x => x.id === item.id);
+    if (!p) return '';
+    return `
+      <div class="summary-item">
+        <div class="summary-item-color" style="background:${p.color}"></div>
+        <div class="summary-item-details">
+          <div class="summary-item-name">${p.name}</div>
+          <div class="summary-item-meta">Qty: ${item.qty}</div>
+        </div>
+        <div class="summary-item-price">${(p.priceEUR * item.qty).toFixed(2)} EUR</div>
+      </div>
+    `;
+  }).join('');
+
+  const subtotal = getSubtotal();
+  const fee = getDeliveryFee();
+
+  document.getElementById('subtotal').textContent = subtotal.toFixed(2) + ' EUR';
+  document.getElementById('deliveryFee').textContent = fee === 0 ? 'Free' : fee.toFixed(2) + ' EUR';
+  document.getElementById('totalPrice').textContent = getTotal().toFixed(2) + ' EUR';
+}
+
+/* ============================================
+   DELIVERY OPTIONS
+   ============================================ */
+
+function selectDelivery(el, type) {
+  document.querySelectorAll('.delivery-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+
+  const dateRow = document.getElementById('dateRow');
+  dateRow.style.display = type === 'scheduled' ? 'grid' : 'none';
+}
+
+/* ============================================
+   FORM VALIDATION
+   ============================================ */
+
+function validateForm() {
+  const required = [
+    { id: 'senderName', label: 'Your name' },
+    { id: 'senderEmail', label: 'Your email' },
+    { id: 'recipientName', label: 'Recipient name' },
+    { id: 'recipientPhone', label: 'Recipient phone' },
+    { id: 'recipientAddress', label: 'Delivery address' }
+  ];
+
+  let valid = true;
+
+  // Clear previous errors
+  document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+
+  for (const field of required) {
+    const input = document.getElementById(field.id);
+    if (!input.value.trim()) {
+      input.classList.add('error');
+      input.focus();
+      valid = false;
+      break;
+    }
+  }
+
+  // Validate email format
+  const email = document.getElementById('senderEmail');
+  if (email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+    email.classList.add('error');
+    valid = false;
+  }
+
+  // If scheduled, require date
+  const isScheduled = document.querySelector('input[name="delivery"][value="scheduled"]').checked;
+  if (isScheduled) {
+    const dateInput = document.getElementById('deliveryDate');
+    if (!dateInput.value) {
+      dateInput.classList.add('error');
+      valid = false;
+    }
+  }
+
+  return valid;
+}
+
+function getFormData() {
+  const isScheduled = document.querySelector('input[name="delivery"][value="scheduled"]').checked;
+  return {
+    sender: {
+      name: document.getElementById('senderName').value.trim(),
+      email: document.getElementById('senderEmail').value.trim(),
+      phone: document.getElementById('senderPhone').value.trim(),
+      country: document.getElementById('senderCountry').value
+    },
+    recipient: {
+      name: document.getElementById('recipientName').value.trim(),
+      phone: document.getElementById('recipientPhone').value.trim(),
+      address: document.getElementById('recipientAddress').value.trim()
+    },
+    delivery: {
+      type: isScheduled ? 'scheduled' : 'today',
+      date: isScheduled ? document.getElementById('deliveryDate').value : 'Today'
+    },
+    cardMessage: document.getElementById('cardMessage').value.trim(),
+    specialInstructions: document.getElementById('specialInstructions').value.trim(),
+    items: cart.map(item => {
+      const p = PRODUCTS.find(x => x.id === item.id);
+      return { name: p.name, qty: item.qty, priceEUR: p.priceEUR };
+    }),
+    subtotal: getSubtotal(),
+    deliveryFee: getDeliveryFee(),
+    total: getTotal()
+  };
+}
+
+/* ============================================
+   PAYPAL INTEGRATION
+   ============================================ */
+
+function initPayPal() {
+  if (cart.length === 0) return;
+
+  paypal.Buttons({
+    style: {
+      layout: 'vertical',
+      color: 'gold',
+      shape: 'rect',
+      label: 'paypal',
+      height: 50
+    },
+
+    // Called when user clicks PayPal button
+    onClick: function(data, actions) {
+      if (!validateForm()) {
+        alert('Please fill in all required fields before proceeding to payment.');
+        return actions.reject();
+      }
+      return actions.resolve();
+    },
+
+    // Create the PayPal order
+    createOrder: function(data, actions) {
+      const orderData = getFormData();
+      const description = orderData.items.map(i => `${i.qty}x ${i.name}`).join(', ');
+
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: orderData.total.toFixed(2),
+            currency_code: 'EUR',
+            breakdown: {
+              item_total: { value: orderData.subtotal.toFixed(2), currency_code: 'EUR' },
+              shipping: { value: orderData.deliveryFee.toFixed(2), currency_code: 'EUR' }
+            }
+          },
+          description: 'Flowers & Coffee Prilep — ' + description,
+          items: orderData.items.map(item => ({
+            name: item.name,
+            unit_amount: { value: item.priceEUR.toFixed(2), currency_code: 'EUR' },
+            quantity: String(item.qty),
+            category: 'PHYSICAL_GOODS'
+          })),
+          shipping: {
+            name: { full_name: orderData.recipient.name },
+            address: {
+              address_line_1: orderData.recipient.address,
+              admin_area_2: 'Prilep',
+              country_code: 'MK'
+            }
+          },
+          custom_id: JSON.stringify({
+            recipientPhone: orderData.recipient.phone,
+            cardMessage: orderData.cardMessage,
+            deliveryType: orderData.delivery.type,
+            deliveryDate: orderData.delivery.date,
+            specialInstructions: orderData.specialInstructions,
+            senderName: orderData.sender.name,
+            senderEmail: orderData.sender.email,
+            senderPhone: orderData.sender.phone,
+            senderCountry: orderData.sender.country
+          })
+        }]
+      });
+    },
+
+    // Called after payment approved
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        // Payment successful!
+        const orderData = getFormData();
+        const orderId = 'FC-' + data.orderID.slice(-8).toUpperCase();
+
+        // Show confirmation
+        document.getElementById('checkoutContent').style.display = 'none';
+        document.getElementById('confirmation').classList.add('show');
+        document.getElementById('orderId').textContent = 'Order #' + orderId;
+        document.getElementById('confirmEmail').textContent = orderData.sender.email;
+
+        // Clear cart
+        localStorage.removeItem('fc_cart');
+
+        // Log order details (in production, this would be sent to your server)
+        console.log('=== ORDER COMPLETED ===');
+        console.log('PayPal Order ID:', data.orderID);
+        console.log('Order Details:', orderData);
+        console.log('PayPal Details:', details);
+        console.log('========================');
+      });
+    },
+
+    // Handle errors
+    onError: function(err) {
+      console.error('PayPal error:', err);
+      alert('Something went wrong with the payment. Please try again.');
+    },
+
+    // Handle cancellation
+    onCancel: function() {
+      console.log('Payment cancelled by user.');
+    }
+
+  }).render('#paypal-button-container');
+}
+
+/* ============================================
+   INIT
+   ============================================ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Set min date for delivery date picker (tomorrow)
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const dateInput = document.getElementById('deliveryDate');
+  if (dateInput) {
+    dateInput.min = tomorrow.toISOString().split('T')[0];
+  }
+
+  // Character counter for card message
+  const cardMsg = document.getElementById('cardMessage');
+  cardMsg.addEventListener('input', () => {
+    document.getElementById('charCount').textContent = cardMsg.value.length;
+  });
+
+  // Remove error state on input
+  document.querySelectorAll('input, textarea, select').forEach(el => {
+    el.addEventListener('input', () => el.classList.remove('error'));
+  });
+
+  // Render
+  renderSummary();
+  initPayPal();
+});
+</script>
+
+</body>
+</html>
