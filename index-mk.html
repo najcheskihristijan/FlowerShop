@@ -953,7 +953,10 @@ button { cursor: pointer; border: none; font-family: inherit; }
 }
 
 @media (max-width: 768px) {
-  .top-bar { display: none; }
+  .top-bar { padding: 6px 0; font-size: 11px; }
+  .top-bar-left { display: none; }
+  .top-bar .container { justify-content: flex-end; }
+  .top-bar-right { gap: 12px; }
 
   .nav { display: none; }
 
