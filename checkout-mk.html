@@ -607,7 +607,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
       <!-- PayPal -->
       <div class="paypal-section">
         <div class="paypal-sandbox-badge">
-          ВИСТИНСКО ПЛАЌАЊЕ — Ќе бидат наплатени вистински пари.
+          ТЕСТ РЕЖИМ — Нема да се наплатат вистински пари. Ова е тест околина.
         </div>
         <h3>Плати со PayPal</h3>
         <div id="paypal-button-container"></div>
@@ -641,7 +641,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
 </div>
 
 <!-- PayPal SDK (Sandbox mode, EUR currency) -->
-<script src="https://www.paypal.com/sdk/js?client-id=BAAPtO1O4KAIGRLxpJqP8bgLE8t3n2BclH5q7q18BDYR27Ezp4ikYqYm9E3-fy6I7qKtmabyFb4_nKPMb0&currency=EUR&intent=capture"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AT3glBoaA0W2jrD9HDtwvxO0gi_KfTRr8I4W3iLggNO7W7YSGwczwzDk3x4r0aedwdqstJBONkSAz9qj&currency=EUR&intent=capture"></script>
 
 <script>
 /* ============================================
@@ -906,7 +906,7 @@ function initPayPal() {
     // Handle errors
     onError: function(err) {
       console.error('PayPal error:', err);
-      alert('Нешто тргна наопаку со плаќањето. Ве молиме обидете се повторно.');
+      alert('PayPal грешка: ' + (err && err.message ? err.message : err) + '\n\nОтворете ја конзолата (F12) за детали.');
     },
 
     // Handle cancellation
