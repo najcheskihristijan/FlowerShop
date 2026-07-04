@@ -665,10 +665,10 @@ button { cursor: pointer; border: none; font-family: inherit; }
 const PRODUCTS = [
   {id:1,name:"Say It With Love",img:"standard-bouquet-white-lily-rose-pink-flower-delivery-prilep.webp",sizes:[{key:'S',label:"Small",mkd:600,eur:10},{key:'M',label:"Medium",mkd:1200,eur:20},{key:'L',label:"Large",mkd:2000,eur:33}]},
   {id:2,name:"Florist's Choice",img:"florist-choice-white-lily-bouquet-flower-delivery-prilep.webp",sizes:[{key:'S',label:"Small",mkd:600,eur:10},{key:'M',label:"Medium",mkd:1200,eur:20},{key:'L',label:"Large",mkd:2200,eur:37}]},
-  {id:3,name:"Flower Box Premium",img:"premium-flower-box-mixed-roses-lisianthus-prilep-delivery.webp",sizes:[{key:'S',label:"Small",mkd:1500,eur:25},{key:'M',label:"Medium",mkd:2500,eur:42},{key:'L',label:"Large",mkd:3000,eur:50}]},
+  {id:3,name:"Flower Box Premium",img:"premium-flower-box-mixed-roses-lisianthus-prilep-delivery.webp",sizes:[{key:'S',label:"Small",mkd:1500,eur:25},{key:'M',label:"Medium",mkd:2500,eur:42},{key:'L',label:"Large",mkd:3000,eur:50}],designs:[{key:'mixed',label:"Mixed",img:"premium-flower-box-mixed-roses-lisianthus-prilep-delivery.webp"},{key:'white',label:"White roses",img:"premium-flower-box-white-rose-hydrangea-prilep-delivery.webp"},{key:'bright',label:"Bright",img:"premium-flower-box-red-yellow-gerbera-lily-prilep-delivery.webp"}]},
   {id:4,name:"Red Roses",img:"red-roses-bouquet-classic-romantic-flower-delivery-prilep.webp",sizes:[{key:'S',label:"3 roses",mkd:450,eur:8},{key:'M',label:"9 roses",mkd:850,eur:14},{key:'L',label:"12 roses",mkd:1750,eur:29}]},
   {id:5,name:"White Roses",img:"white-roses-bouquet-elegant-flower-delivery-prilep.webp",sizes:[{key:'S',label:"9 roses",mkd:450,eur:8},{key:'M',label:"15 roses",mkd:850,eur:14},{key:'L',label:"25 roses",mkd:1750,eur:29}]},
-  {id:6,name:"Happy Birthday",img:"premium-flower-box-red-yellow-gerbera-lily-prilep-delivery.webp",sizes:[{key:'S',label:"Small",mkd:1000,eur:17},{key:'M',label:"Medium",mkd:1500,eur:25},{key:'L',label:"Large",mkd:2000,eur:33}]},
+  {id:6,name:"Happy Birthday",img:"standard-mixed-bouquet-lily-hydrangea-flower-delivery-prilep.webp",sizes:[{key:'S',label:"Small",mkd:1000,eur:17},{key:'M',label:"Medium",mkd:1500,eur:25},{key:'L',label:"Large",mkd:2000,eur:33}]},
   {id:7,name:"She Said Yes",img:"she-said-yes-engagement-lily-hydrangea-bouquet-prilep.webp",sizes:[{key:'S',label:"Small",mkd:1000,eur:17},{key:'M',label:"Medium",mkd:1500,eur:25},{key:'L',label:"Large",mkd:2000,eur:33}]},
   {id:8,name:"It's a Girl / It's a Boy",img:"its-a-girl-boy-new-baby-hydrangea-bouquet-prilep-delivery.webp",sizes:[{key:'S',label:"Small",mkd:1000,eur:17},{key:'M',label:"Medium",mkd:1500,eur:25},{key:'L',label:"Large",mkd:2000,eur:33}]},
   {id:99,name:"Test Product",img:"",sizes:[{key:'M',label:"",mkd:31,eur:0.5}]}
@@ -687,10 +687,12 @@ const ADDONS = [
 function resolveLine(key){
   if(!key) return null;
   if(key.charAt(0)==='p'){
-    var parts=key.slice(1).split('-'), pid=parseInt(parts[0],10), size=parts[1];
+    var parts=key.slice(1).split('-'), pid=parseInt(parts[0],10), size=parts[1], design=parts[2];
     var p=PRODUCTS.find(function(x){return x.id===pid;}); if(!p) return null;
     var s=(p.sizes||[]).find(function(z){return z.key===size;}); if(!s) return null;
-    return {key:key, name:p.name+(s.label?' — '+s.label:''), priceEUR:s.eur, priceMKD:s.mkd, img:p.img};
+    var img=p.img, name=p.name+(s.label?' — '+s.label:'');
+    if(design && p.designs){ var d=p.designs.find(function(z){return z.key===design;}); if(d){ img=d.img; name=name+' · '+d.label; } }
+    return {key:key, name:name, priceEUR:s.eur, priceMKD:s.mkd, img:img};
   }
   var a=ADDONS.find(function(x){return x.id===key.slice(2);}); if(!a) return null;
   return {key:key, name:a.name, priceEUR:a.eur, priceMKD:a.mkd, emoji:a.emoji};

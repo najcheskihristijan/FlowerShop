@@ -1011,6 +1011,11 @@ button { cursor: pointer; border: none; font-family: inherit; }
 .size-btn{flex:1;padding:.4rem 0;border:1px solid #e7dcd6;background:#fff;border-radius:6px;cursor:pointer;font-size:.8rem;font-weight:600;color:#7a6d66;transition:var(--transition)}
 .size-btn:hover{border-color:var(--pink)}
 .size-btn.active{background:var(--pink);border-color:var(--pink);color:#fff}
+.design-selector{display:flex;gap:.4rem;margin:.1rem 0 .6rem}
+.design-thumb{width:46px;height:46px;padding:0;border:2px solid #e7dcd6;border-radius:8px;overflow:hidden;cursor:pointer;background:#fff;transition:var(--transition)}
+.design-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.design-thumb:hover{border-color:var(--pink)}
+.design-thumb.active{border-color:var(--pink);box-shadow:0 0 0 2px rgba(212,99,122,.25)}
 .addons-section{padding:2.5rem 0 3.5rem;background:#faf6f2}
 .addons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem}
 .addon-card{background:#fff;border:1px solid #efe6e0;border-radius:10px;padding:1.1rem .8rem;text-align:center;transition:var(--transition)}
@@ -1026,6 +1031,22 @@ button { cursor: pointer; border: none; font-family: inherit; }
 .summary-item-thumb{width:44px;height:44px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#f3ece7}
 .summary-item-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .summary-item-emoji{display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+
+/* ---- hero: photo + scroll-scrub rose bloom ---- */
+.hero-sticky{width:100%}
+.hero-visual{position:relative;width:520px;height:420px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.hero-photo-static{width:100%;height:100%;object-fit:cover;border-radius:12px;display:block;box-shadow:0 20px 45px rgba(0,0,0,.10)}
+.hero-rose-canvas{display:none;max-width:100%;max-height:78vh;height:auto;width:auto}
+.hero.rose-mode{min-height:220vh;display:block;padding:0}
+.hero.rose-mode .hero-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center}
+.hero.rose-mode .hero-photo-static{display:none}
+.hero.rose-mode .hero-visual{width:auto;height:auto}
+.hero.rose-mode .hero-rose-canvas{display:block;filter:drop-shadow(0 24px 45px rgba(120,90,110,.22))}
+@media (max-width:900px){
+  .hero-visual{width:100%;height:320px;margin-top:1.5rem}
+  .hero.rose-mode{min-height:180vh}
+  .hero.rose-mode .hero-rose-canvas{max-height:60vh}
+}
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -1088,16 +1109,19 @@ button { cursor: pointer; border: none; font-family: inherit; }
 </header>
 
 <!-- ==================== HERO ==================== -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-content">
+<section class="hero" id="hero">
+  <div class="hero-sticky">
+    <div class="container">
+      <div class="hero-content">
       <div class="hero-label">Flowers &amp; Coffee &mdash; Prilep</div>
       <h1 class="hero-title">Fresh Flowers,<br><em>Delivered</em> with Love</h1>
       <p class="hero-text">Send beautiful bouquets to your loved ones in Prilep — from anywhere in the world. Order online, we deliver same day.</p>
       <a href="#shop" class="btn btn-pink">Shop Now</a>
     </div>
-    <div class="hero-image bg-coral">
-      <div class="image-placeholder">Your hero photo here<br>(bouquet + coffee arrangement)</div>
+      <div class="hero-visual">
+        <img class="hero-photo-static" src="/images/hero-flowers-coffee-prilep-delivery.webp" alt="Fresh pastel bouquet with a takeaway coffee — flower delivery in Prilep" width="520" height="420">
+        <canvas class="hero-rose-canvas" width="560" height="996" aria-hidden="true"></canvas>
+      </div>
     </div>
   </div>
 </section>
@@ -1221,6 +1245,11 @@ button { cursor: pointer; border: none; font-family: inherit; }
         <div class="product-info">
           <h3 class="product-name">Flower Box Premium</h3>
           <p class="product-desc">Elegant flower box with premium flowers.</p>
+          <div class="design-selector" role="group" aria-label="Choose design">
+            <button type="button" class="design-thumb active" data-design="mixed" title="Mixed"><img src="/images/products/premium-flower-box-mixed-roses-lisianthus-prilep-delivery.webp" alt="Mixed" loading="lazy"></button>
+            <button type="button" class="design-thumb" data-design="white" title="White roses"><img src="/images/products/premium-flower-box-white-rose-hydrangea-prilep-delivery.webp" alt="White roses" loading="lazy"></button>
+            <button type="button" class="design-thumb" data-design="bright" title="Bright"><img src="/images/products/premium-flower-box-red-yellow-gerbera-lily-prilep-delivery.webp" alt="Bright" loading="lazy"></button>
+          </div>
           <div class="size-selector" role="group" aria-label="Choose size">
             <button type="button" class="size-btn" data-size="S" data-mkd="1,500" data-eur="25">S</button>
             <button type="button" class="size-btn active" data-size="M" data-mkd="2,500" data-eur="42">M</button>
@@ -1268,7 +1297,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
 
       <div class="product-card" data-id="6">
         <div class="product-image">
-          <img class="product-photo" src="/images/products/premium-flower-box-red-yellow-gerbera-lily-prilep-delivery.webp" alt="Happy Birthday bright gerbera and lily bouquet — flower delivery Prilep" loading="lazy">
+          <img class="product-photo" src="/images/products/standard-mixed-bouquet-lily-hydrangea-flower-delivery-prilep.webp" alt="Happy Birthday bright gerbera and lily bouquet — flower delivery Prilep" loading="lazy">
         </div>
         <div class="product-info">
           <h3 class="product-name">Happy Birthday</h3>
@@ -1738,10 +1767,10 @@ button { cursor: pointer; border: none; font-family: inherit; }
 const PRODUCTS = [
   {id:1,name:"Say It With Love",img:"standard-bouquet-white-lily-rose-pink-flower-delivery-prilep.webp",sizes:[{key:'S',label:"Small",mkd:600,eur:10},{key:'M',label:"Medium",mkd:1200,eur:20},{key:'L',label:"Large",mkd:2000,eur:33}]},
   {id:2,name:"Florist's Choice",img:"florist-choice-white-lily-bouquet-flower-delivery-prilep.webp",sizes:[{key:'S',label:"Small",mkd:600,eur:10},{key:'M',label:"Medium",mkd:1200,eur:20},{key:'L',label:"Large",mkd:2200,eur:37}]},
-  {id:3,name:"Flower Box Premium",img:"premium-flower-box-mixed-roses-lisianthus-prilep-delivery.webp",sizes:[{key:'S',label:"Small",mkd:1500,eur:25},{key:'M',label:"Medium",mkd:2500,eur:42},{key:'L',label:"Large",mkd:3000,eur:50}]},
+  {id:3,name:"Flower Box Premium",img:"premium-flower-box-mixed-roses-lisianthus-prilep-delivery.webp",sizes:[{key:'S',label:"Small",mkd:1500,eur:25},{key:'M',label:"Medium",mkd:2500,eur:42},{key:'L',label:"Large",mkd:3000,eur:50}],designs:[{key:'mixed',label:"Mixed",img:"premium-flower-box-mixed-roses-lisianthus-prilep-delivery.webp"},{key:'white',label:"White roses",img:"premium-flower-box-white-rose-hydrangea-prilep-delivery.webp"},{key:'bright',label:"Bright",img:"premium-flower-box-red-yellow-gerbera-lily-prilep-delivery.webp"}]},
   {id:4,name:"Red Roses",img:"red-roses-bouquet-classic-romantic-flower-delivery-prilep.webp",sizes:[{key:'S',label:"3 roses",mkd:450,eur:8},{key:'M',label:"9 roses",mkd:850,eur:14},{key:'L',label:"12 roses",mkd:1750,eur:29}]},
   {id:5,name:"White Roses",img:"white-roses-bouquet-elegant-flower-delivery-prilep.webp",sizes:[{key:'S',label:"9 roses",mkd:450,eur:8},{key:'M',label:"15 roses",mkd:850,eur:14},{key:'L',label:"25 roses",mkd:1750,eur:29}]},
-  {id:6,name:"Happy Birthday",img:"premium-flower-box-red-yellow-gerbera-lily-prilep-delivery.webp",sizes:[{key:'S',label:"Small",mkd:1000,eur:17},{key:'M',label:"Medium",mkd:1500,eur:25},{key:'L',label:"Large",mkd:2000,eur:33}]},
+  {id:6,name:"Happy Birthday",img:"standard-mixed-bouquet-lily-hydrangea-flower-delivery-prilep.webp",sizes:[{key:'S',label:"Small",mkd:1000,eur:17},{key:'M',label:"Medium",mkd:1500,eur:25},{key:'L',label:"Large",mkd:2000,eur:33}]},
   {id:7,name:"She Said Yes",img:"she-said-yes-engagement-lily-hydrangea-bouquet-prilep.webp",sizes:[{key:'S',label:"Small",mkd:1000,eur:17},{key:'M',label:"Medium",mkd:1500,eur:25},{key:'L',label:"Large",mkd:2000,eur:33}]},
   {id:8,name:"It's a Girl / It's a Boy",img:"its-a-girl-boy-new-baby-hydrangea-bouquet-prilep-delivery.webp",sizes:[{key:'S',label:"Small",mkd:1000,eur:17},{key:'M',label:"Medium",mkd:1500,eur:25},{key:'L',label:"Large",mkd:2000,eur:33}]},
   {id:99,name:"Test Product",img:"",sizes:[{key:'M',label:"",mkd:31,eur:0.5}]}
@@ -1760,10 +1789,12 @@ const ADDONS = [
 function resolveLine(key){
   if(!key) return null;
   if(key.charAt(0)==='p'){
-    var parts=key.slice(1).split('-'), pid=parseInt(parts[0],10), size=parts[1];
+    var parts=key.slice(1).split('-'), pid=parseInt(parts[0],10), size=parts[1], design=parts[2];
     var p=PRODUCTS.find(function(x){return x.id===pid;}); if(!p) return null;
     var s=(p.sizes||[]).find(function(z){return z.key===size;}); if(!s) return null;
-    return {key:key, name:p.name+(s.label?' — '+s.label:''), priceEUR:s.eur, priceMKD:s.mkd, img:p.img};
+    var img=p.img, name=p.name+(s.label?' — '+s.label:'');
+    if(design && p.designs){ var d=p.designs.find(function(z){return z.key===design;}); if(d){ img=d.img; name=name+' · '+d.label; } }
+    return {key:key, name:name, priceEUR:s.eur, priceMKD:s.mkd, img:img};
   }
   var a=ADDONS.find(function(x){return x.id===key.slice(2);}); if(!a) return null;
   return {key:key, name:a.name, priceEUR:a.eur, priceMKD:a.mkd, emoji:a.emoji};
@@ -1812,10 +1843,20 @@ document.addEventListener('DOMContentLoaded', function(){
         if(pe) pe.textContent='~'+btn.dataset.eur+' EUR';
       });
     });
+    card.querySelectorAll('.design-thumb').forEach(function(dt){
+      dt.addEventListener('click', function(){
+        card.querySelectorAll('.design-thumb').forEach(function(b){ b.classList.remove('active'); });
+        dt.classList.add('active');
+        var photo=card.querySelector('.product-photo'), im=dt.querySelector('img');
+        if(photo && im) photo.src=im.src;
+      });
+    });
     var addBtn=card.querySelector('.add-to-cart-btn');
     if(addBtn) addBtn.addEventListener('click', function(e){ e.preventDefault();
       var act=card.querySelector('.size-btn.active')||card.querySelector('.size-btn');
-      var size=act?act.dataset.size:'M'; addLine('p'+id+'-'+size); openCart(); });
+      var size=act?act.dataset.size:'M';
+      var dsel=card.querySelector('.design-thumb.active');
+      addLine('p'+id+'-'+size+(dsel?'-'+dsel.dataset.design:'')); openCart(); });
   });
   document.querySelectorAll('.addon-add-btn').forEach(function(btn){
     btn.addEventListener('click', function(e){ e.preventDefault(); addLine('a-'+btn.closest('.addon-card').dataset.aid); openCart(); });
@@ -1828,5 +1869,34 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 
+
+<script>
+/* Hero rose bloom — scroll-scrubbed frame sequence. Gated behind ?preview or ?rose so the
+   public hero stays the static photo until the effect is approved. */
+(function(){
+  var params = new URLSearchParams(location.search);
+  if(!(params.has('preview') || params.has('rose'))) return;
+  var hero = document.getElementById('hero');
+  var canvas = document.querySelector('.hero-rose-canvas');
+  if(!hero || !canvas || !canvas.getContext) return;
+  var N = 60, base = '/images/rose-bloom/rose';
+  function pad(i){ return ('00'+i).slice(-3); }
+  var ctx = canvas.getContext('2d'), imgs = new Array(N), current = -1;
+  function draw(i){ if(i===current) return; var im=imgs[i]; if(im && im.complete){ ctx.clearRect(0,0,canvas.width,canvas.height); ctx.drawImage(im,0,0,canvas.width,canvas.height); current=i; } }
+  hero.classList.add('rose-mode');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  for(var i=0;i<N;i++){ (function(i){ var im=new Image(); im.onload=function(){ if(i===0) draw(0); if(reduce && i===N-1) draw(N-1); }; im.src=base+pad(i)+'.webp'; imgs[i]=im; })(i); }
+  if(reduce) return;
+  var ticking=false;
+  function onScroll(){ if(ticking) return; ticking=true; requestAnimationFrame(function(){
+    var total = hero.offsetHeight - window.innerHeight;
+    var prog = total>0 ? Math.min(1, Math.max(0, (-hero.getBoundingClientRect().top)/total)) : 0;
+    draw(Math.round(prog*(N-1))); ticking=false;
+  }); }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
 </body>
 </html>
