@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /$
+Allow: /index.html
+Allow: /index-mk.html
+Disallow: /checkout.html
+Disallow: /checkout-mk.html
+
+Sitemap: https://flowershop.mk/sitemap.xml
