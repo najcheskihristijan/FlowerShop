@@ -1002,6 +1002,30 @@ button { cursor: pointer; border: none; font-family: inherit; }
 .bg-mauve { background: linear-gradient(145deg, #f0d5e0, #e0b3c8); }
 .bg-cream-warm { background: linear-gradient(145deg, #fef0e0, #fce0c0); }
 .bg-mint { background: linear-gradient(145deg, #d0f0e0, #a8e0c8); }
+
+/* ---- catalog: product photos, size selector, add-ons (added by build_catalog) ---- */
+.product-photo{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.product-card:hover .product-photo{transform:scale(1.05)}
+.product-desc{font-size:.82rem;color:#8a7f78;margin:.15rem 0 .7rem;line-height:1.4;min-height:2.3em}
+.size-selector{display:flex;gap:.4rem;margin:.2rem 0 .7rem}
+.size-btn{flex:1;padding:.4rem 0;border:1px solid #e7dcd6;background:#fff;border-radius:6px;cursor:pointer;font-size:.8rem;font-weight:600;color:#7a6d66;transition:var(--transition)}
+.size-btn:hover{border-color:var(--pink)}
+.size-btn.active{background:var(--pink);border-color:var(--pink);color:#fff}
+.addons-section{padding:2.5rem 0 3.5rem;background:#faf6f2}
+.addons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem}
+.addon-card{background:#fff;border:1px solid #efe6e0;border-radius:10px;padding:1.1rem .8rem;text-align:center;transition:var(--transition)}
+.addon-card:hover{box-shadow:0 6px 18px rgba(0,0,0,.06);transform:translateY(-2px)}
+.addon-emoji{font-size:2rem;margin-bottom:.4rem}
+.addon-name{font-weight:600;font-size:.9rem;color:#4a413c}
+.addon-price{font-size:.78rem;color:#8a7f78;margin:.25rem 0 .7rem}
+.addon-add-btn{width:100%;padding:.45rem;border:none;border-radius:6px;background:var(--pink);color:#fff;font-weight:600;cursor:pointer;font-size:.82rem;transition:var(--transition)}
+.addon-add-btn:hover{filter:brightness(.95)}
+.cart-item-thumb{width:48px;height:48px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#f3ece7}
+.cart-item-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.cart-item-emoji{display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.summary-item-thumb{width:44px;height:44px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#f3ece7}
+.summary-item-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.summary-item-emoji{display:flex;align-items:center;justify-content:center;font-size:1.4rem}
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -1147,192 +1171,226 @@ button { cursor: pointer; border: none; font-family: inherit; }
 <section class="products-section" id="shop">
   <div class="container">
     <div class="section-heading">
-      <h2>наши букети</h2>
+      <h2>нашите букети</h2>
       <div class="divider"></div>
     </div>
 
     <div class="product-grid">
 
-      <!-- Test Product -->
-      <div class="product-card" data-id="99">
-        <div class="product-image">
-          <div class="product-image-bg" style="background:#cccccc">
-            <div class="image-placeholder">Тест</div>
-          </div>
-          <span class="product-badge badge-hot">ТЕСТ</span>
-          <div class="product-actions">
-            <button class="action-btn action-btn-wide add-to-cart-btn" data-id="99">
-              <svg class="icon" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              Додај во кошничка
-            </button>
-          </div>
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">Тест производ (0.50 EUR)</h3>
-          <div class="product-price">31 MKD <span class="product-price-eur">~0.50 EUR</span></div>
-        </div>
-      </div>
-
-      <!-- Product 1 -->
       <div class="product-card" data-id="1">
         <div class="product-image">
-          <div class="product-image-bg bg-rose">
-            <div class="image-placeholder">Photo</div>
-          </div>
+          <img class="product-photo" src="/images/products/standard-bouquet-white-lily-rose-pink-flower-delivery-prilep.webp" alt="Букет Кажи го со љубов во пастелни тонови — достава цвеќе во Прилеп" loading="lazy">
           <span class="product-badge badge-hot">Популарно</span>
-          <div class="product-actions">
-            <button class="action-btn action-btn-wide add-to-cart-btn" data-id="1">
-              <svg class="icon" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              Додај во кошничка
-            </button>
-          </div>
         </div>
         <div class="product-info">
-          <h3 class="product-name">Една роза (завиткана)</h3>
-          <div class="product-price">250 MKD <span class="product-price-eur">~4 EUR</span></div>
+          <h3 class="product-name">Кажи го со љубов</h3>
+          <p class="product-desc">Нежен романтичен букет во пастелни тонови.</p>
+          <div class="size-selector" role="group" aria-label="Изберете големина">
+            <button type="button" class="size-btn" data-size="S" data-mkd="600" data-eur="10">S</button>
+            <button type="button" class="size-btn active" data-size="M" data-mkd="1,200" data-eur="20">M</button>
+            <button type="button" class="size-btn" data-size="L" data-mkd="2,000" data-eur="33">L</button>
+          </div>
+          <div class="product-price"><span class="price-mkd">1,200 MKD</span> <span class="product-price-eur">~20 EUR</span></div>
+          <button type="button" class="action-btn action-btn-wide add-to-cart-btn">Додади во кошничка</button>
         </div>
       </div>
 
-      <!-- Product 2 -->
       <div class="product-card" data-id="2">
         <div class="product-image">
-          <div class="product-image-bg bg-peach">
-            <div class="image-placeholder">Photo</div>
-          </div>
-          <span class="product-badge badge-new">Ново</span>
-          <div class="product-actions">
-            <button class="action-btn action-btn-wide add-to-cart-btn" data-id="2">
-              <svg class="icon" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              Додај во кошничка
-            </button>
-          </div>
+          <img class="product-photo" src="/images/products/florist-choice-white-lily-bouquet-flower-delivery-prilep.webp" alt="Сезонски букет Избор на флористот — достава цвеќе во Прилеп" loading="lazy">
+          <span class="product-badge badge-new">Избор на флорист</span>
         </div>
         <div class="product-info">
-          <h3 class="product-name">Кафе + мини букет комбо</h3>
-          <div class="product-price">350 MKD <span class="product-price-eur">~6 EUR</span></div>
+          <h3 class="product-name">Избор на флористот</h3>
+          <p class="product-desc">Сезонски букет создаден од нашиот флорист.</p>
+          <div class="size-selector" role="group" aria-label="Изберете големина">
+            <button type="button" class="size-btn" data-size="S" data-mkd="600" data-eur="10">S</button>
+            <button type="button" class="size-btn active" data-size="M" data-mkd="1,200" data-eur="20">M</button>
+            <button type="button" class="size-btn" data-size="L" data-mkd="2,200" data-eur="37">L</button>
+          </div>
+          <div class="product-price"><span class="price-mkd">1,200 MKD</span> <span class="product-price-eur">~20 EUR</span></div>
+          <button type="button" class="action-btn action-btn-wide add-to-cart-btn">Додади во кошничка</button>
         </div>
       </div>
 
-      <!-- Product 3 -->
       <div class="product-card" data-id="3">
         <div class="product-image">
-          <div class="product-image-bg bg-sage">
-            <div class="image-placeholder">Photo</div>
-          </div>
-          <div class="product-actions">
-            <button class="action-btn action-btn-wide add-to-cart-btn" data-id="3">
-              <svg class="icon" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              Додај во кошничка
-            </button>
-          </div>
+          <img class="product-photo" src="/images/products/premium-flower-box-mixed-roses-lisianthus-prilep-delivery.webp" alt="Премиум кутија со цвеќе — достава цвеќе во Прилеп" loading="lazy">
+          <span class="product-badge badge-sale">Премиум</span>
         </div>
         <div class="product-info">
-          <h3 class="product-name">Мал мешан букет</h3>
-          <div class="product-price">900 MKD <span class="product-price-eur">~15 EUR</span></div>
+          <h3 class="product-name">Премиум кутија со цвеќе</h3>
+          <p class="product-desc">Елегантна кутија со премиум цвеќе.</p>
+          <div class="size-selector" role="group" aria-label="Изберете големина">
+            <button type="button" class="size-btn" data-size="S" data-mkd="1,500" data-eur="25">S</button>
+            <button type="button" class="size-btn active" data-size="M" data-mkd="2,500" data-eur="42">M</button>
+            <button type="button" class="size-btn" data-size="L" data-mkd="3,000" data-eur="50">L</button>
+          </div>
+          <div class="product-price"><span class="price-mkd">2,500 MKD</span> <span class="product-price-eur">~42 EUR</span></div>
+          <button type="button" class="action-btn action-btn-wide add-to-cart-btn">Додади во кошничка</button>
         </div>
       </div>
 
-      <!-- Product 4 -->
       <div class="product-card" data-id="4">
         <div class="product-image">
-          <div class="product-image-bg bg-blush">
-            <div class="image-placeholder">Photo</div>
-          </div>
-          <span class="product-badge badge-hot">Хит</span>
-          <div class="product-actions">
-            <button class="action-btn action-btn-wide add-to-cart-btn" data-id="4">
-              <svg class="icon" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              Додај во кошничка
-            </button>
-          </div>
+          <img class="product-photo" src="/images/products/red-roses-bouquet-classic-romantic-flower-delivery-prilep.webp" alt="Букет класични црвени рози — достава цвеќе во Прилеп" loading="lazy">
+          <span class="product-badge badge-hot">Најпродавано</span>
         </div>
         <div class="product-info">
-          <h3 class="product-name">Кутија со рози (3 рози)</h3>
-          <div class="product-price">1,150 MKD <span class="product-price-eur">~19 EUR</span></div>
+          <h3 class="product-name">Црвени рози</h3>
+          <p class="product-desc">Класични премиум црвени рози.</p>
+          <div class="size-selector" role="group" aria-label="Изберете големина">
+            <button type="button" class="size-btn" data-size="S" data-mkd="450" data-eur="8">3</button>
+            <button type="button" class="size-btn active" data-size="M" data-mkd="850" data-eur="14">9</button>
+            <button type="button" class="size-btn" data-size="L" data-mkd="1,750" data-eur="29">12</button>
+          </div>
+          <div class="product-price"><span class="price-mkd">850 MKD</span> <span class="product-price-eur">~14 EUR</span></div>
+          <button type="button" class="action-btn action-btn-wide add-to-cart-btn">Додади во кошничка</button>
         </div>
       </div>
 
-      <!-- Product 5 -->
       <div class="product-card" data-id="5">
         <div class="product-image">
-          <div class="product-image-bg bg-lavender">
-            <div class="image-placeholder">Photo</div>
-          </div>
-          <div class="product-actions">
-            <button class="action-btn action-btn-wide add-to-cart-btn" data-id="5">
-              <svg class="icon" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              Додај во кошничка
-            </button>
-          </div>
+          <img class="product-photo" src="/images/products/white-roses-bouquet-elegant-flower-delivery-prilep.webp" alt="Букет елегантни бели рози — достава цвеќе во Прилеп" loading="lazy">
         </div>
         <div class="product-info">
-          <h3 class="product-name">Класичен букет рози (11)</h3>
-          <div class="product-price">1,200 MKD <span class="product-price-eur">~20 EUR</span></div>
+          <h3 class="product-name">Бели рози</h3>
+          <p class="product-desc">Елегантни бели рози.</p>
+          <div class="size-selector" role="group" aria-label="Изберете големина">
+            <button type="button" class="size-btn" data-size="S" data-mkd="450" data-eur="8">9</button>
+            <button type="button" class="size-btn active" data-size="M" data-mkd="850" data-eur="14">15</button>
+            <button type="button" class="size-btn" data-size="L" data-mkd="1,750" data-eur="29">25</button>
+          </div>
+          <div class="product-price"><span class="price-mkd">850 MKD</span> <span class="product-price-eur">~14 EUR</span></div>
+          <button type="button" class="action-btn action-btn-wide add-to-cart-btn">Додади во кошничка</button>
         </div>
       </div>
 
-      <!-- Product 6 -->
       <div class="product-card" data-id="6">
         <div class="product-image">
-          <div class="product-image-bg bg-sunny">
-            <div class="image-placeholder">Photo</div>
-          </div>
-          <span class="product-badge badge-new">Ново</span>
-          <div class="product-actions">
-            <button class="action-btn action-btn-wide add-to-cart-btn" data-id="6">
-              <svg class="icon" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              Додај во кошничка
-            </button>
-          </div>
+          <img class="product-photo" src="/images/products/premium-flower-box-red-yellow-gerbera-lily-prilep-delivery.webp" alt="Весел роденденски букет со гербери и лилјани — достава цвеќе во Прилеп" loading="lazy">
         </div>
         <div class="product-info">
-          <h3 class="product-name">Сезонски аранжман</h3>
-          <div class="product-price">1,500 MKD <span class="product-price-eur">~25 EUR</span></div>
+          <h3 class="product-name">Среќен роденден</h3>
+          <p class="product-desc">Весел букет за роденден.</p>
+          <div class="size-selector" role="group" aria-label="Изберете големина">
+            <button type="button" class="size-btn" data-size="S" data-mkd="1,000" data-eur="17">S</button>
+            <button type="button" class="size-btn active" data-size="M" data-mkd="1,500" data-eur="25">M</button>
+            <button type="button" class="size-btn" data-size="L" data-mkd="2,000" data-eur="33">L</button>
+          </div>
+          <div class="product-price"><span class="price-mkd">1,500 MKD</span> <span class="product-price-eur">~25 EUR</span></div>
+          <button type="button" class="action-btn action-btn-wide add-to-cart-btn">Додади во кошничка</button>
         </div>
       </div>
 
-      <!-- Product 7 -->
       <div class="product-card" data-id="7">
         <div class="product-image">
-          <div class="product-image-bg bg-mauve">
-            <div class="image-placeholder">Photo</div>
-          </div>
-          <span class="product-badge badge-sale">Premium</span>
-          <div class="product-actions">
-            <button class="action-btn action-btn-wide add-to-cart-btn" data-id="7">
-              <svg class="icon" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              Додај во кошничка
-            </button>
-          </div>
+          <img class="product-photo" src="/images/products/she-said-yes-engagement-lily-hydrangea-bouquet-prilep.webp" alt="Букет за свршувачка Таа рече да — достава цвеќе во Прилеп" loading="lazy">
         </div>
         <div class="product-info">
-          <h3 class="product-name">Кутија со рози (5 рози)</h3>
-          <div class="product-price">1,500 MKD <span class="product-price-eur">~24 EUR</span></div>
+          <h3 class="product-name">Таа рече да</h3>
+          <p class="product-desc">Романтичен букет за свршувачка.</p>
+          <div class="size-selector" role="group" aria-label="Изберете големина">
+            <button type="button" class="size-btn" data-size="S" data-mkd="1,000" data-eur="17">S</button>
+            <button type="button" class="size-btn active" data-size="M" data-mkd="1,500" data-eur="25">M</button>
+            <button type="button" class="size-btn" data-size="L" data-mkd="2,000" data-eur="33">L</button>
+          </div>
+          <div class="product-price"><span class="price-mkd">1,500 MKD</span> <span class="product-price-eur">~25 EUR</span></div>
+          <button type="button" class="action-btn action-btn-wide add-to-cart-btn">Додади во кошничка</button>
         </div>
       </div>
 
-      <!-- Product 8 -->
       <div class="product-card" data-id="8">
         <div class="product-image">
-          <div class="product-image-bg bg-coral">
-            <div class="image-placeholder">Photo</div>
-          </div>
-          <div class="product-actions">
-            <button class="action-btn action-btn-wide add-to-cart-btn" data-id="8">
-              <svg class="icon" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              Додај во кошничка
-            </button>
-          </div>
+          <img class="product-photo" src="/images/products/its-a-girl-boy-new-baby-hydrangea-bouquet-prilep-delivery.webp" alt="Букет за новороденче Девојче е или Момче е — достава цвеќе во Прилеп" loading="lazy">
         </div>
         <div class="product-info">
-          <h3 class="product-name">Голем букет рози (21)</h3>
-          <div class="product-price">2,300 MKD <span class="product-price-eur">~37 EUR</span></div>
+          <h3 class="product-name">Девојче е / Момче е</h3>
+          <p class="product-desc">Букет за прослава на новороденче.</p>
+          <div class="size-selector" role="group" aria-label="Изберете големина">
+            <button type="button" class="size-btn" data-size="S" data-mkd="1,000" data-eur="17">S</button>
+            <button type="button" class="size-btn active" data-size="M" data-mkd="1,500" data-eur="25">M</button>
+            <button type="button" class="size-btn" data-size="L" data-mkd="2,000" data-eur="33">L</button>
+          </div>
+          <div class="product-price"><span class="price-mkd">1,500 MKD</span> <span class="product-price-eur">~25 EUR</span></div>
+          <button type="button" class="action-btn action-btn-wide add-to-cart-btn">Додади во кошничка</button>
+        </div>
+      </div>
+
+      <div class="product-card test-card" data-id="99" hidden>
+        <div class="product-image">
+          <div class="product-image-bg" style="background:#eee"><div class="image-placeholder">Test</div></div>
+          <span class="product-badge badge-hot">ТЕСТ</span>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Тест производ</h3>
+          <p class="product-desc">Тест за жива уплата.</p>
+          <div class="size-selector" role="group" aria-label="Изберете големина">
+            <button type="button" class="size-btn active" data-size="M" data-mkd="31" data-eur="0.5">€0.50</button>
+          </div>
+          <div class="product-price"><span class="price-mkd">31 MKD</span> <span class="product-price-eur">~0.5 EUR</span></div>
+          <button type="button" class="action-btn action-btn-wide add-to-cart-btn">Додади во кошничка</button>
         </div>
       </div>
 
     </div>
   </div>
 </section>
+
+<!-- ==================== ADD-ONS ==================== -->
+<section class="addons-section" id="addons">
+  <div class="container">
+    <div class="section-heading">
+      <h2>додади нешто повеќе</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="addons-grid">
+      <div class="addon-card" data-aid="choc">
+        <div class="addon-emoji">🍫</div>
+        <div class="addon-name">Чоколади</div>
+        <div class="addon-price">350 MKD · ~6 EUR</div>
+        <button type="button" class="addon-add-btn">Додади</button>
+      </div>
+      <div class="addon-card" data-aid="ferrero">
+        <div class="addon-emoji">🍬</div>
+        <div class="addon-name">Фереро Рошер</div>
+        <div class="addon-price">500 MKD · ~8 EUR</div>
+        <button type="button" class="addon-add-btn">Додади</button>
+      </div>
+      <div class="addon-card" data-aid="teddy">
+        <div class="addon-emoji">🧸</div>
+        <div class="addon-name">Плишано мече</div>
+        <div class="addon-price">700 MKD · ~12 EUR</div>
+        <button type="button" class="addon-add-btn">Додади</button>
+      </div>
+      <div class="addon-card" data-aid="card">
+        <div class="addon-emoji">💌</div>
+        <div class="addon-name">Честитка</div>
+        <div class="addon-price">100 MKD · ~2 EUR</div>
+        <button type="button" class="addon-add-btn">Додади</button>
+      </div>
+      <div class="addon-card" data-aid="vase">
+        <div class="addon-emoji">🏺</div>
+        <div class="addon-name">Вазна</div>
+        <div class="addon-price">400 MKD · ~7 EUR</div>
+        <button type="button" class="addon-add-btn">Додади</button>
+      </div>
+      <div class="addon-card" data-aid="wine">
+        <div class="addon-emoji">🍷</div>
+        <div class="addon-name">Шише вино</div>
+        <div class="addon-price">1,200 MKD · ~20 EUR</div>
+        <button type="button" class="addon-add-btn">Додади</button>
+      </div>
+      <div class="addon-card" data-aid="candle">
+        <div class="addon-emoji">🕯️</div>
+        <div class="addon-name">Свеќа</div>
+        <div class="addon-price">600 MKD · ~10 EUR</div>
+        <button type="button" class="addon-add-btn">Додади</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ==================== FEATURE BANNERS ==================== -->
 <section class="feature-banners">
@@ -1678,156 +1736,94 @@ button { cursor: pointer; border: none; font-family: inherit; }
    ============================================ */
 
 const PRODUCTS = [
-  { id: 1,  name: "Single Rose (Wrapped)",       priceMKD: 250,   priceEUR: 4,   color: "#e8b4b4" },
-  { id: 2,  name: "Coffee + Mini Bouquet Combo",  priceMKD: 350,   priceEUR: 6,   color: "#ffc9a8" },
-  { id: 3,  name: "Small Mixed Bouquet",          priceMKD: 900,   priceEUR: 15,  color: "#b8d4bb" },
-  { id: 4,  name: "Rose Box (3 Roses)",           priceMKD: 1150,  priceEUR: 19,  color: "#f8bbd0" },
-  { id: 5,  name: "Classic Rose Bouquet (11)",     priceMKD: 1200,  priceEUR: 20,  color: "#d1bfe0" },
-  { id: 6,  name: "Seasonal Arrangement",         priceMKD: 1500,  priceEUR: 25,  color: "#ffe599" },
-  { id: 7,  name: "Rose Box (5 Roses)",           priceMKD: 1500,  priceEUR: 24,  color: "#e0b3c8" },
-  { id: 8,  name: "Grand Rose Bouquet (21)",      priceMKD: 2300,  priceEUR: 37,  color: "#ffb3a3" },
-  { id: 9,  name: "Premium Mixed Bouquet",        priceMKD: 2500,  priceEUR: 40,  color: "#c9d4a9" },
-  { id: 10, name: "Luxury Bouquet",               priceMKD: 4000,  priceEUR: 65,  color: "#d4a9a9" },
-  { id: 99, name: "Тест производ (0.50 EUR)",      priceMKD: 31,    priceEUR: 0.50, color: "#cccccc" }
+  {id:1,name:"Кажи го со љубов",img:"standard-bouquet-white-lily-rose-pink-flower-delivery-prilep.webp",sizes:[{key:'S',label:"Мала",mkd:600,eur:10},{key:'M',label:"Средна",mkd:1200,eur:20},{key:'L',label:"Голема",mkd:2000,eur:33}]},
+  {id:2,name:"Избор на флористот",img:"florist-choice-white-lily-bouquet-flower-delivery-prilep.webp",sizes:[{key:'S',label:"Мала",mkd:600,eur:10},{key:'M',label:"Средна",mkd:1200,eur:20},{key:'L',label:"Голема",mkd:2200,eur:37}]},
+  {id:3,name:"Премиум кутија со цвеќе",img:"premium-flower-box-mixed-roses-lisianthus-prilep-delivery.webp",sizes:[{key:'S',label:"Мала",mkd:1500,eur:25},{key:'M',label:"Средна",mkd:2500,eur:42},{key:'L',label:"Голема",mkd:3000,eur:50}]},
+  {id:4,name:"Црвени рози",img:"red-roses-bouquet-classic-romantic-flower-delivery-prilep.webp",sizes:[{key:'S',label:"3 рози",mkd:450,eur:8},{key:'M',label:"9 рози",mkd:850,eur:14},{key:'L',label:"12 рози",mkd:1750,eur:29}]},
+  {id:5,name:"Бели рози",img:"white-roses-bouquet-elegant-flower-delivery-prilep.webp",sizes:[{key:'S',label:"9 рози",mkd:450,eur:8},{key:'M',label:"15 рози",mkd:850,eur:14},{key:'L',label:"25 рози",mkd:1750,eur:29}]},
+  {id:6,name:"Среќен роденден",img:"premium-flower-box-red-yellow-gerbera-lily-prilep-delivery.webp",sizes:[{key:'S',label:"Мала",mkd:1000,eur:17},{key:'M',label:"Средна",mkd:1500,eur:25},{key:'L',label:"Голема",mkd:2000,eur:33}]},
+  {id:7,name:"Таа рече да",img:"she-said-yes-engagement-lily-hydrangea-bouquet-prilep.webp",sizes:[{key:'S',label:"Мала",mkd:1000,eur:17},{key:'M',label:"Средна",mkd:1500,eur:25},{key:'L',label:"Голема",mkd:2000,eur:33}]},
+  {id:8,name:"Девојче е / Момче е",img:"its-a-girl-boy-new-baby-hydrangea-bouquet-prilep-delivery.webp",sizes:[{key:'S',label:"Мала",mkd:1000,eur:17},{key:'M',label:"Средна",mkd:1500,eur:25},{key:'L',label:"Голема",mkd:2000,eur:33}]},
+  {id:99,name:"Тест производ",img:"",sizes:[{key:'M',label:"",mkd:31,eur:0.5}]}
 ];
 
-// ---- Cart State ----
+const ADDONS = [
+  {id:'choc',name:"Чоколади",emoji:"🍫",mkd:350,eur:6},
+  {id:'ferrero',name:"Фереро Рошер",emoji:"🍬",mkd:500,eur:8},
+  {id:'teddy',name:"Плишано мече",emoji:"🧸",mkd:700,eur:12},
+  {id:'card',name:"Честитка",emoji:"💌",mkd:100,eur:2},
+  {id:'vase',name:"Вазна",emoji:"🏺",mkd:400,eur:7},
+  {id:'wine',name:"Шише вино",emoji:"🍷",mkd:1200,eur:20},
+  {id:'candle',name:"Свеќа",emoji:"🕯️",mkd:600,eur:10}
+];
+
+function resolveLine(key){
+  if(!key) return null;
+  if(key.charAt(0)==='p'){
+    var parts=key.slice(1).split('-'), pid=parseInt(parts[0],10), size=parts[1];
+    var p=PRODUCTS.find(function(x){return x.id===pid;}); if(!p) return null;
+    var s=(p.sizes||[]).find(function(z){return z.key===size;}); if(!s) return null;
+    return {key:key, name:p.name+(s.label?' — '+s.label:''), priceEUR:s.eur, priceMKD:s.mkd, img:p.img};
+  }
+  var a=ADDONS.find(function(x){return x.id===key.slice(2);}); if(!a) return null;
+  return {key:key, name:a.name, priceEUR:a.eur, priceMKD:a.mkd, emoji:a.emoji};
+}
+
 let cart = JSON.parse(localStorage.getItem('fc_cart') || '[]');
+cart = cart.filter(function(it){ return it && it.key && resolveLine(it.key); });
+function saveCart(){ localStorage.setItem('fc_cart', JSON.stringify(cart)); }
+function getCartCount(){ return cart.reduce(function(s,it){return s+it.qty;},0); }
+function getCartTotal(){ return cart.reduce(function(s,it){var l=resolveLine(it.key);return s+(l?l.priceEUR*it.qty:0);},0); }
+function addLine(key){ var it=cart.find(function(i){return i.key===key;}); if(it) it.qty++; else cart.push({key:key,qty:1}); saveCart(); updateCartUI(); showToast(); }
+function removeLine(key){ cart=cart.filter(function(i){return i.key!==key;}); saveCart(); updateCartUI(); }
+function updateQty(key,delta){ var it=cart.find(function(i){return i.key===key;}); if(!it) return; it.qty+=delta; if(it.qty<=0){removeLine(key);return;} saveCart(); updateCartUI(); }
 
-function saveCart() {
-  localStorage.setItem('fc_cart', JSON.stringify(cart));
-}
+function lineThumb(l){ return l.img ? '<div class="cart-item-thumb"><img src="/images/products/'+l.img+'" alt="" loading="lazy"></div>' : '<div class="cart-item-thumb cart-item-emoji">'+(l.emoji||'🎁')+'</div>'; }
 
-function getCartCount() {
-  return cart.reduce((sum, item) => sum + item.qty, 0);
-}
-
-function getCartTotal() {
-  return cart.reduce((sum, item) => {
-    const product = PRODUCTS.find(p => p.id === item.id);
-    return sum + (product ? product.priceEUR * item.qty : 0);
-  }, 0);
-}
-
-function addToCart(productId) {
-  const existing = cart.find(item => item.id === productId);
-  if (existing) {
-    existing.qty++;
-  } else {
-    cart.push({ id: productId, qty: 1 });
-  }
-  saveCart();
-  updateCartUI();
-  showToast();
-}
-
-function removeFromCart(productId) {
-  cart = cart.filter(item => item.id !== productId);
-  saveCart();
-  updateCartUI();
-}
-
-function updateQty(productId, delta) {
-  const item = cart.find(i => i.id === productId);
-  if (!item) return;
-  item.qty += delta;
-  if (item.qty <= 0) {
-    removeFromCart(productId);
-    return;
-  }
-  saveCart();
-  updateCartUI();
-}
-
-// ---- UI Updates ----
-function updateCartUI() {
-  // Update counter in header
-  document.querySelectorAll('.cart-count').forEach(el => {
-    el.textContent = getCartCount();
-  });
-
-  // Update sidebar
-  const itemsContainer = document.getElementById('cartItems');
-  const footer = document.getElementById('cartFooter');
-
-  if (cart.length === 0) {
-    itemsContainer.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
-    footer.style.display = 'none';
-    return;
-  }
-
-  footer.style.display = 'block';
-
-  itemsContainer.innerHTML = cart.map(item => {
-    const product = PRODUCTS.find(p => p.id === item.id);
-    if (!product) return '';
-    return `
-      <div class="cart-item">
-        <div class="cart-item-color" style="background:${product.color}"></div>
-        <div class="cart-item-details">
-          <div class="cart-item-name">${product.name}</div>
-          <div class="cart-item-price">${product.priceEUR} EUR</div>
-          <div class="cart-item-qty">
-            <button class="qty-btn" onclick="updateQty(${product.id}, -1)">&minus;</button>
-            <span>${item.qty}</span>
-            <button class="qty-btn" onclick="updateQty(${product.id}, 1)">+</button>
-          </div>
-        </div>
-        <button class="cart-item-remove" onclick="removeFromCart(${product.id})">&times;</button>
-      </div>
-    `;
+function updateCartUI(){
+  document.querySelectorAll('.cart-count').forEach(function(el){ el.textContent=getCartCount(); });
+  var itemsContainer=document.getElementById('cartItems');
+  var footer=document.getElementById('cartFooter');
+  if(cart.length===0){ itemsContainer.innerHTML='<div class="cart-empty">Вашата кошничка е празна</div>'; footer.style.display='none'; return; }
+  footer.style.display='block';
+  itemsContainer.innerHTML=cart.map(function(it){ var l=resolveLine(it.key); if(!l) return '';
+    return '<div class="cart-item">'+lineThumb(l)+
+      '<div class="cart-item-details"><div class="cart-item-name">'+l.name+'</div>'+
+      '<div class="cart-item-price">'+l.priceEUR+' EUR</div>'+
+      '<div class="cart-item-qty"><button class="qty-btn" onclick="updateQty(\''+it.key+'\',-1)">&minus;</button><span>'+it.qty+'</span><button class="qty-btn" onclick="updateQty(\''+it.key+'\',1)">+</button></div></div>'+
+      '<button class="cart-item-remove" onclick="removeLine(\''+it.key+'\')">&times;</button></div>';
   }).join('');
-
-  document.getElementById('cartTotal').textContent = getCartTotal() + ' EUR';
+  document.getElementById('cartTotal').textContent=getCartTotal()+' EUR';
 }
 
-// ---- Toast ----
-function showToast() {
-  const toast = document.getElementById('toast');
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 1800);
-}
+function showToast(){ var t=document.getElementById('toast'); if(!t) return; t.classList.add('show'); setTimeout(function(){t.classList.remove('show');},1800); }
+function openCart(){ document.getElementById('cartSidebar').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeCart(){ document.getElementById('cartSidebar').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open'); document.body.style.overflow=''; }
 
-// ---- Cart Sidebar Toggle ----
-function openCart() {
-  document.getElementById('cartSidebar').classList.add('open');
-  document.getElementById('cartOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeCart() {
-  document.getElementById('cartSidebar').classList.remove('open');
-  document.getElementById('cartOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// ---- Event Listeners ----
-document.addEventListener('DOMContentLoaded', () => {
-  // Add to cart buttons
-  document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const id = parseInt(btn.dataset.id);
-      addToCart(id);
-      openCart();
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.product-card').forEach(function(card){
+    var id=card.dataset.id;
+    card.querySelectorAll('.size-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        card.querySelectorAll('.size-btn').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var pm=card.querySelector('.price-mkd'), pe=card.querySelector('.product-price-eur');
+        if(pm) pm.textContent=btn.dataset.mkd+' MKD';
+        if(pe) pe.textContent='~'+btn.dataset.eur+' EUR';
+      });
     });
+    var addBtn=card.querySelector('.add-to-cart-btn');
+    if(addBtn) addBtn.addEventListener('click', function(e){ e.preventDefault();
+      var act=card.querySelector('.size-btn.active')||card.querySelector('.size-btn');
+      var size=act?act.dataset.size:'M'; addLine('p'+id+'-'+size); openCart(); });
   });
-
-  // Cart icon in header
-  const cartLink = document.querySelector('[title="Cart"]');
-  if (cartLink) {
-    cartLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      openCart();
-    });
-  }
-
-  // Close cart
-  document.getElementById('cartClose').addEventListener('click', closeCart);
-  document.getElementById('cartOverlay').addEventListener('click', closeCart);
-
-  // Init UI
+  document.querySelectorAll('.addon-add-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){ e.preventDefault(); addLine('a-'+btn.closest('.addon-card').dataset.aid); openCart(); });
+  });
+  var cartLink=document.querySelector('[title="Cart"]'); if(cartLink){ cartLink.addEventListener('click', function(e){ e.preventDefault(); openCart(); }); }
+  var cc=document.getElementById('cartClose'); if(cc) cc.addEventListener('click', closeCart);
+  var co=document.getElementById('cartOverlay'); if(co) co.addEventListener('click', closeCart);
+  if(location.search.indexOf('test')!==-1){ document.querySelectorAll('.test-card').forEach(function(c){ c.hidden=false; }); }
   updateCartUI();
 });
 </script>

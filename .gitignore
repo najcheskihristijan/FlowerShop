@@ -1,3 +1,10 @@
 .DS_Store
 *.log
 node_modules/
+
+# Source assets kept local (converted WebPs live in images/products/)
+flowerashop images/
+
+# Sensitive — business registration, never commit to the public repo
+flowershop_mk_9676_registracija.pdf
+*.pdf

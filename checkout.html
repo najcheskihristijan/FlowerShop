@@ -467,6 +467,10 @@ button { cursor: pointer; border: none; font-family: inherit; }
   .order-summary { position: static; }
   .form-row { grid-template-columns: 1fr; }
 }
+
+.summary-item-thumb{width:44px;height:44px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#f3ece7}
+.summary-item-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.summary-item-emoji{display:flex;align-items:center;justify-content:center;font-size:1.4rem}
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -659,20 +663,41 @@ button { cursor: pointer; border: none; font-family: inherit; }
    ============================================ */
 
 const PRODUCTS = [
-  { id: 1,  name: "Single Rose (Wrapped)",       priceMKD: 250,   priceEUR: 4,   color: "#e8b4b4" },
-  { id: 2,  name: "Coffee + Mini Bouquet Combo",  priceMKD: 350,   priceEUR: 6,   color: "#ffc9a8" },
-  { id: 3,  name: "Small Mixed Bouquet",          priceMKD: 900,   priceEUR: 15,  color: "#b8d4bb" },
-  { id: 4,  name: "Rose Box (3 Roses)",           priceMKD: 1150,  priceEUR: 19,  color: "#f8bbd0" },
-  { id: 5,  name: "Classic Rose Bouquet (11)",     priceMKD: 1200,  priceEUR: 20,  color: "#d1bfe0" },
-  { id: 6,  name: "Seasonal Arrangement",         priceMKD: 1500,  priceEUR: 25,  color: "#ffe599" },
-  { id: 7,  name: "Rose Box (5 Roses)",           priceMKD: 1500,  priceEUR: 24,  color: "#e0b3c8" },
-  { id: 8,  name: "Grand Rose Bouquet (21)",      priceMKD: 2300,  priceEUR: 37,  color: "#ffb3a3" },
-  { id: 9,  name: "Premium Mixed Bouquet",        priceMKD: 2500,  priceEUR: 40,  color: "#c9d4a9" },
-  { id: 10, name: "Luxury Bouquet",               priceMKD: 4000,  priceEUR: 65,  color: "#d4a9a9" },
-  { id: 99, name: "Test Product (0.50 EUR)",       priceMKD: 31,    priceEUR: 0.50, color: "#cccccc" }
+  {id:1,name:"Say It With Love",img:"standard-bouquet-white-lily-rose-pink-flower-delivery-prilep.webp",sizes:[{key:'S',label:"Small",mkd:600,eur:10},{key:'M',label:"Medium",mkd:1200,eur:20},{key:'L',label:"Large",mkd:2000,eur:33}]},
+  {id:2,name:"Florist's Choice",img:"florist-choice-white-lily-bouquet-flower-delivery-prilep.webp",sizes:[{key:'S',label:"Small",mkd:600,eur:10},{key:'M',label:"Medium",mkd:1200,eur:20},{key:'L',label:"Large",mkd:2200,eur:37}]},
+  {id:3,name:"Flower Box Premium",img:"premium-flower-box-mixed-roses-lisianthus-prilep-delivery.webp",sizes:[{key:'S',label:"Small",mkd:1500,eur:25},{key:'M',label:"Medium",mkd:2500,eur:42},{key:'L',label:"Large",mkd:3000,eur:50}]},
+  {id:4,name:"Red Roses",img:"red-roses-bouquet-classic-romantic-flower-delivery-prilep.webp",sizes:[{key:'S',label:"3 roses",mkd:450,eur:8},{key:'M',label:"9 roses",mkd:850,eur:14},{key:'L',label:"12 roses",mkd:1750,eur:29}]},
+  {id:5,name:"White Roses",img:"white-roses-bouquet-elegant-flower-delivery-prilep.webp",sizes:[{key:'S',label:"9 roses",mkd:450,eur:8},{key:'M',label:"15 roses",mkd:850,eur:14},{key:'L',label:"25 roses",mkd:1750,eur:29}]},
+  {id:6,name:"Happy Birthday",img:"premium-flower-box-red-yellow-gerbera-lily-prilep-delivery.webp",sizes:[{key:'S',label:"Small",mkd:1000,eur:17},{key:'M',label:"Medium",mkd:1500,eur:25},{key:'L',label:"Large",mkd:2000,eur:33}]},
+  {id:7,name:"She Said Yes",img:"she-said-yes-engagement-lily-hydrangea-bouquet-prilep.webp",sizes:[{key:'S',label:"Small",mkd:1000,eur:17},{key:'M',label:"Medium",mkd:1500,eur:25},{key:'L',label:"Large",mkd:2000,eur:33}]},
+  {id:8,name:"It's a Girl / It's a Boy",img:"its-a-girl-boy-new-baby-hydrangea-bouquet-prilep-delivery.webp",sizes:[{key:'S',label:"Small",mkd:1000,eur:17},{key:'M',label:"Medium",mkd:1500,eur:25},{key:'L',label:"Large",mkd:2000,eur:33}]},
+  {id:99,name:"Test Product",img:"",sizes:[{key:'M',label:"",mkd:31,eur:0.5}]}
 ];
 
+const ADDONS = [
+  {id:'choc',name:"Chocolates",emoji:"🍫",mkd:350,eur:6},
+  {id:'ferrero',name:"Ferrero Rocher",emoji:"🍬",mkd:500,eur:8},
+  {id:'teddy',name:"Teddy Bear",emoji:"🧸",mkd:700,eur:12},
+  {id:'card',name:"Greeting Card",emoji:"💌",mkd:100,eur:2},
+  {id:'vase',name:"Vase",emoji:"🏺",mkd:400,eur:7},
+  {id:'wine',name:"Bottle of Wine",emoji:"🍷",mkd:1200,eur:20},
+  {id:'candle',name:"Candle",emoji:"🕯️",mkd:600,eur:10}
+];
+
+function resolveLine(key){
+  if(!key) return null;
+  if(key.charAt(0)==='p'){
+    var parts=key.slice(1).split('-'), pid=parseInt(parts[0],10), size=parts[1];
+    var p=PRODUCTS.find(function(x){return x.id===pid;}); if(!p) return null;
+    var s=(p.sizes||[]).find(function(z){return z.key===size;}); if(!s) return null;
+    return {key:key, name:p.name+(s.label?' — '+s.label:''), priceEUR:s.eur, priceMKD:s.mkd, img:p.img};
+  }
+  var a=ADDONS.find(function(x){return x.id===key.slice(2);}); if(!a) return null;
+  return {key:key, name:a.name, priceEUR:a.eur, priceMKD:a.mkd, emoji:a.emoji};
+}
+
 let cart = JSON.parse(localStorage.getItem('fc_cart') || '[]');
+cart = cart.filter(function(it){ return it && it.key && resolveLine(it.key); });
 const DELIVERY_FEE = 2; // EUR — waived over 25 EUR (~1500 MKD)
 const FREE_DELIVERY_THRESHOLD = 25;
 
@@ -681,10 +706,7 @@ const FREE_DELIVERY_THRESHOLD = 25;
    ============================================ */
 
 function getSubtotal() {
-  return cart.reduce((sum, item) => {
-    const p = PRODUCTS.find(x => x.id === item.id);
-    return sum + (p ? p.priceEUR * item.qty : 0);
-  }, 0);
+  return cart.reduce(function(sum, it){ var l = resolveLine(it.key); return sum + (l ? l.priceEUR * it.qty : 0); }, 0);
 }
 
 function getDeliveryFee() {
@@ -696,32 +718,18 @@ function getTotal() {
 }
 
 function renderSummary() {
-  const container = document.getElementById('summaryItems');
-
+  var container = document.getElementById('summaryItems');
   if (cart.length === 0) {
     document.getElementById('checkoutContent').style.display = 'none';
     document.getElementById('emptyCart').style.display = 'block';
     return;
   }
-
-  container.innerHTML = cart.map(item => {
-    const p = PRODUCTS.find(x => x.id === item.id);
-    if (!p) return '';
-    return `
-      <div class="summary-item">
-        <div class="summary-item-color" style="background:${p.color}"></div>
-        <div class="summary-item-details">
-          <div class="summary-item-name">${p.name}</div>
-          <div class="summary-item-meta">Qty: ${item.qty}</div>
-        </div>
-        <div class="summary-item-price">${(p.priceEUR * item.qty).toFixed(2)} EUR</div>
-      </div>
-    `;
+  container.innerHTML = cart.map(function(it){
+    var l = resolveLine(it.key); if(!l) return '';
+    var thumb = l.img ? '<div class="summary-item-thumb"><img src="/images/products/'+l.img+'" alt=""></div>' : '<div class="summary-item-thumb summary-item-emoji">'+(l.emoji||'🎁')+'</div>';
+    return '<div class="summary-item">'+thumb+'<div class="summary-item-details"><div class="summary-item-name">'+l.name+'</div><div class="summary-item-meta">Qty: '+it.qty+'</div></div><div class="summary-item-price">'+(l.priceEUR*it.qty).toFixed(2)+' EUR</div></div>';
   }).join('');
-
-  const subtotal = getSubtotal();
-  const fee = getDeliveryFee();
-
+  var subtotal = getSubtotal(); var fee = getDeliveryFee();
   document.getElementById('subtotal').textContent = subtotal.toFixed(2) + ' EUR';
   document.getElementById('deliveryFee').textContent = fee === 0 ? 'Free' : fee.toFixed(2) + ' EUR';
   document.getElementById('totalPrice').textContent = getTotal().toFixed(2) + ' EUR';
@@ -808,10 +816,7 @@ function getFormData() {
     },
     cardMessage: document.getElementById('cardMessage').value.trim(),
     specialInstructions: document.getElementById('specialInstructions').value.trim(),
-    items: cart.map(item => {
-      const p = PRODUCTS.find(x => x.id === item.id);
-      return { name: p.name, qty: item.qty, priceEUR: p.priceEUR };
-    }),
+    items: cart.filter(function(it){ return resolveLine(it.key); }).map(function(it){ var l = resolveLine(it.key); return { name: l.name, qty: it.qty, priceEUR: l.priceEUR }; }),
     subtotal: getSubtotal(),
     deliveryFee: getDeliveryFee(),
     total: getTotal()
