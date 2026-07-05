@@ -1021,17 +1021,20 @@ button { cursor: pointer; border: none; font-family: inherit; }
 .addons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem}
 .addon-card{background:#fff;border:1px solid #efe6e0;border-radius:10px;padding:1.1rem .8rem;text-align:center;transition:var(--transition)}
 .addon-card:hover{box-shadow:0 6px 18px rgba(0,0,0,.06);transform:translateY(-2px)}
-.addon-emoji{font-size:2rem;margin-bottom:.4rem}
+.addon-icon{display:flex;justify-content:center;margin-bottom:.55rem;color:var(--ink,#1c1b19)}
+.addon-icon svg{width:38px;height:38px}
 .addon-name{font-weight:600;font-size:.9rem;color:#4a413c}
 .addon-price{font-size:.78rem;color:#8a7f78;margin:.25rem 0 .7rem}
 .addon-add-btn{width:100%;padding:.45rem;border:none;border-radius:6px;background:var(--pink);color:#fff;font-weight:600;cursor:pointer;font-size:.82rem;transition:var(--transition)}
 .addon-add-btn:hover{filter:brightness(.95)}
 .cart-item-thumb{width:48px;height:48px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#f3ece7}
 .cart-item-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.cart-item-emoji{display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.cart-item-icon{display:flex;align-items:center;justify-content:center;color:var(--ink,#1c1b19)}
+.cart-item-icon svg{width:26px;height:26px}
 .summary-item-thumb{width:44px;height:44px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#f3ece7}
 .summary-item-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.summary-item-emoji{display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.summary-item-icon{display:flex;align-items:center;justify-content:center;color:#1c1b19}
+.summary-item-icon svg{width:24px;height:24px}
 
 /* ---- hero: photo + scroll-scrub rose bloom ---- */
 .hero-sticky{width:100%}
@@ -1352,43 +1355,43 @@ button { cursor: pointer; border: none; font-family: inherit; }
     </div>
     <div class="addons-grid">
       <div class="addon-card" data-aid="choc">
-        <div class="addon-emoji">🍫</div>
+        <div class="addon-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="5.5" width="15" height="13" rx="1.2"/><path d="M4.5 10.2h15M4.5 14.5h15M9.4 5.5v13M14.6 5.5v13"/></svg></div>
         <div class="addon-name">Chocolates</div>
         <div class="addon-price">350 MKD · ~6 EUR</div>
         <button type="button" class="addon-add-btn">Add</button>
       </div>
       <div class="addon-card" data-aid="ferrero">
-        <div class="addon-emoji">🍬</div>
+        <div class="addon-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.3" r="4"/><path d="M7 12.3h10l-1 6a1 1 0 0 1-1 .8H9a1 1 0 0 1-1-.8l-1-6z"/><path d="M9.6 12.8v5.4M12 12.8v5.7M14.4 12.8v5.4"/></svg></div>
         <div class="addon-name">Ferrero Rocher</div>
         <div class="addon-price">500 MKD · ~8 EUR</div>
         <button type="button" class="addon-add-btn">Add</button>
       </div>
       <div class="addon-card" data-aid="teddy">
-        <div class="addon-emoji">🧸</div>
+        <div class="addon-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="6.6" r="2"/><circle cx="17" cy="6.6" r="2"/><circle cx="12" cy="13" r="6"/><circle cx="12" cy="14" r="1.4"/><path d="M9.7 11.2h.01M14.3 11.2h.01"/></svg></div>
         <div class="addon-name">Teddy Bear</div>
         <div class="addon-price">700 MKD · ~12 EUR</div>
         <button type="button" class="addon-add-btn">Add</button>
       </div>
       <div class="addon-card" data-aid="card">
-        <div class="addon-emoji">💌</div>
+        <div class="addon-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="17" height="12" rx="1.4"/><path d="M4 7.2l8 5.6 8-5.6"/></svg></div>
         <div class="addon-name">Greeting Card</div>
         <div class="addon-price">100 MKD · ~2 EUR</div>
         <button type="button" class="addon-add-btn">Add</button>
       </div>
       <div class="addon-card" data-aid="vase">
-        <div class="addon-emoji">🏺</div>
+        <div class="addon-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 3.5h7"/><path d="M9.4 3.5c-.2 2-2.4 3-2.4 7.5 0 4.6 2.3 9 5 9s5-4.4 5-9c0-4.5-2.2-5.5-2.4-7.5"/></svg></div>
         <div class="addon-name">Vase</div>
         <div class="addon-price">400 MKD · ~7 EUR</div>
         <button type="button" class="addon-add-btn">Add</button>
       </div>
       <div class="addon-card" data-aid="wine">
-        <div class="addon-emoji">🍷</div>
+        <div class="addon-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10.2 2.5h3.6"/><path d="M11 2.5v3.3c0 .7-.3 1.1-.8 1.6-1.2 1.2-1.7 2.2-1.7 4.1v7.5a1.5 1.5 0 0 0 1.5 1.5h4a1.5 1.5 0 0 0 1.5-1.5V11.5c0-1.9-.5-2.9-1.7-4.1-.5-.5-.8-.9-.8-1.6V2.5"/><path d="M8.8 12.5h6.4"/></svg></div>
         <div class="addon-name">Bottle of Wine</div>
         <div class="addon-price">1,200 MKD · ~20 EUR</div>
         <button type="button" class="addon-add-btn">Add</button>
       </div>
       <div class="addon-card" data-aid="candle">
-        <div class="addon-emoji">🕯️</div>
+        <div class="addon-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="8.8" y="9.5" width="6.4" height="10" rx="0.8"/><path d="M12 9.5V7.5"/><path d="M12 3.5c1.1 1.1 1.6 2 1.6 2.9a1.6 1.6 0 0 1-3.2 0c0-.9.5-1.8 1.6-2.9z"/></svg></div>
         <div class="addon-name">Candle</div>
         <div class="addon-price">600 MKD · ~10 EUR</div>
         <button type="button" class="addon-add-btn">Add</button>
@@ -1758,13 +1761,13 @@ const PRODUCTS = [
 ];
 
 const ADDONS = [
-  {id:'choc',name:"Chocolates",emoji:"🍫",mkd:350,eur:6},
-  {id:'ferrero',name:"Ferrero Rocher",emoji:"🍬",mkd:500,eur:8},
-  {id:'teddy',name:"Teddy Bear",emoji:"🧸",mkd:700,eur:12},
-  {id:'card',name:"Greeting Card",emoji:"💌",mkd:100,eur:2},
-  {id:'vase',name:"Vase",emoji:"🏺",mkd:400,eur:7},
-  {id:'wine',name:"Bottle of Wine",emoji:"🍷",mkd:1200,eur:20},
-  {id:'candle',name:"Candle",emoji:"🕯️",mkd:600,eur:10}
+  {id:'choc',name:"Chocolates",icon:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4.5\" y=\"5.5\" width=\"15\" height=\"13\" rx=\"1.2\"/><path d=\"M4.5 10.2h15M4.5 14.5h15M9.4 5.5v13M14.6 5.5v13\"/></svg>",mkd:350,eur:6},
+  {id:'ferrero',name:"Ferrero Rocher",icon:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"8.3\" r=\"4\"/><path d=\"M7 12.3h10l-1 6a1 1 0 0 1-1 .8H9a1 1 0 0 1-1-.8l-1-6z\"/><path d=\"M9.6 12.8v5.4M12 12.8v5.7M14.4 12.8v5.4\"/></svg>",mkd:500,eur:8},
+  {id:'teddy',name:"Teddy Bear",icon:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"7\" cy=\"6.6\" r=\"2\"/><circle cx=\"17\" cy=\"6.6\" r=\"2\"/><circle cx=\"12\" cy=\"13\" r=\"6\"/><circle cx=\"12\" cy=\"14\" r=\"1.4\"/><path d=\"M9.7 11.2h.01M14.3 11.2h.01\"/></svg>",mkd:700,eur:12},
+  {id:'card',name:"Greeting Card",icon:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3.5\" y=\"6\" width=\"17\" height=\"12\" rx=\"1.4\"/><path d=\"M4 7.2l8 5.6 8-5.6\"/></svg>",mkd:100,eur:2},
+  {id:'vase',name:"Vase",icon:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8.5 3.5h7\"/><path d=\"M9.4 3.5c-.2 2-2.4 3-2.4 7.5 0 4.6 2.3 9 5 9s5-4.4 5-9c0-4.5-2.2-5.5-2.4-7.5\"/></svg>",mkd:400,eur:7},
+  {id:'wine',name:"Bottle of Wine",icon:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10.2 2.5h3.6\"/><path d=\"M11 2.5v3.3c0 .7-.3 1.1-.8 1.6-1.2 1.2-1.7 2.2-1.7 4.1v7.5a1.5 1.5 0 0 0 1.5 1.5h4a1.5 1.5 0 0 0 1.5-1.5V11.5c0-1.9-.5-2.9-1.7-4.1-.5-.5-.8-.9-.8-1.6V2.5\"/><path d=\"M8.8 12.5h6.4\"/></svg>",mkd:1200,eur:20},
+  {id:'candle',name:"Candle",icon:"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"8.8\" y=\"9.5\" width=\"6.4\" height=\"10\" rx=\"0.8\"/><path d=\"M12 9.5V7.5\"/><path d=\"M12 3.5c1.1 1.1 1.6 2 1.6 2.9a1.6 1.6 0 0 1-3.2 0c0-.9.5-1.8 1.6-2.9z\"/></svg>",mkd:600,eur:10}
 ];
 
 function resolveLine(key){
@@ -1778,7 +1781,7 @@ function resolveLine(key){
     return {key:key, name:name, priceEUR:s.eur, priceMKD:s.mkd, img:img};
   }
   var a=ADDONS.find(function(x){return x.id===key.slice(2);}); if(!a) return null;
-  return {key:key, name:a.name, priceEUR:a.eur, priceMKD:a.mkd, emoji:a.emoji};
+  return {key:key, name:a.name, priceEUR:a.eur, priceMKD:a.mkd, icon:a.icon};
 }
 
 let cart = JSON.parse(localStorage.getItem('fc_cart') || '[]');
@@ -1790,7 +1793,7 @@ function addLine(key){ var it=cart.find(function(i){return i.key===key;}); if(it
 function removeLine(key){ cart=cart.filter(function(i){return i.key!==key;}); saveCart(); updateCartUI(); }
 function updateQty(key,delta){ var it=cart.find(function(i){return i.key===key;}); if(!it) return; it.qty+=delta; if(it.qty<=0){removeLine(key);return;} saveCart(); updateCartUI(); }
 
-function lineThumb(l){ return l.img ? '<div class="cart-item-thumb"><img src="/images/products/'+l.img+'" alt="" loading="lazy"></div>' : '<div class="cart-item-thumb cart-item-emoji">'+(l.emoji||'🎁')+'</div>'; }
+function lineThumb(l){ return l.img ? '<div class="cart-item-thumb"><img src="/images/products/'+l.img+'" alt="" loading="lazy"></div>' : '<div class="cart-item-thumb cart-item-icon">'+(l.icon||'')+'</div>'; }
 
 function updateCartUI(){
   document.querySelectorAll('.cart-count').forEach(function(el){ el.textContent=getCartCount(); });
