@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌹</text></svg>">
+<title>Orders — Flowershop.mk Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#111111;--cream:#f7f4ee;--white:#fff;--text:#2b2926;--muted:#6b6359;--border:#e4ddce}
+  body{font-family:'Manrope',sans-serif;background:var(--cream);color:var(--text);font-weight:300;line-height:1.5}
+  h1,h2{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:-.02em}
+  a{color:inherit}
+  .wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
+  /* login */
+  .login{max-width:360px;margin:12vh auto;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:2.5rem 2rem;text-align:center}
+  .login h1{font-size:2rem;margin-bottom:.3rem}
+  .login p{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
+  .login input{width:100%;padding:.8rem 1rem;margin-bottom:.8rem;border:1px solid var(--border);border-radius:4px;font-family:inherit;font-size:.95rem;background:var(--cream)}
+  .login input:focus{outline:none;border-color:var(--ink)}
+  .btn{background:var(--ink);color:var(--cream);border:none;border-radius:3px;padding:.85rem 1.5rem;font-family:'Manrope',sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;font-size:.75rem;cursor:pointer;transition:.2s}
+  .btn:hover{background:#000}
+  .btn-sm{padding:.45rem .9rem;font-size:.68rem;letter-spacing:1px}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--border)}
+  .btn-ghost:hover{background:var(--ink);color:var(--cream)}
+  .err{color:#b03a3a;font-size:.85rem;min-height:1.2em;margin-top:.4rem}
+  /* topbar */
+  .top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:1.2rem}
+  .top h1{font-size:2.2rem}
+  .top .meta{color:var(--muted);font-size:.82rem}
+  .toolbar{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-bottom:1.4rem}
+  .toolbar input,.toolbar select{padding:.6rem .9rem;border:1px solid var(--border);border-radius:4px;font-family:inherit;font-size:.9rem;background:var(--white)}
+  .toolbar input{flex:1;min-width:200px}
+  /* orders */
+  .order{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:1.3rem 1.5rem;margin-bottom:1rem}
+  .order.done{opacity:.62}
+  .order-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
+  .order-head .who{font-size:1.05rem;font-weight:600;color:var(--ink)}
+  .order-head .when{color:var(--muted);font-size:.78rem}
+  .total{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--ink)}
+  .status{display:inline-block;font-size:.62rem;text-transform:uppercase;letter-spacing:1.5px;padding:.2rem .55rem;border-radius:3px;margin-left:.6rem;vertical-align:middle}
+  .status.new{background:var(--ink);color:var(--cream)}
+  .status.done{background:#e4ddce;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem 2rem;margin:1rem 0;font-size:.88rem}
+  .grid .k{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px}
+  .items{border-top:1px solid var(--border);margin-top:.8rem;padding-top:.8rem;font-size:.88rem}
+  .items .it{display:flex;justify-content:space-between;padding:.15rem 0}
+  .order-actions{margin-top:1rem;display:flex;gap:.6rem}
+  .empty{text-align:center;color:var(--muted);padding:4rem 1rem}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginView" class="login" style="display:none">
+  <h1>Flowershop.mk</h1>
+  <p>Orders dashboard — staff login</p>
+  <input id="email" type="email" placeholder="Email" autocomplete="username">
+  <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+  <button class="btn" style="width:100%" onclick="doLogin()">Sign in</button>
+  <div id="loginErr" class="err"></div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashView" class="wrap" style="display:none">
+  <div class="top">
+    <div>
+      <h1>Orders</h1>
+      <div class="meta" id="stats"></div>
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="doLogout()">Log out</button>
+  </div>
+  <div class="toolbar">
+    <input id="search" type="text" placeholder="Search name, phone, email…" oninput="render()">
+    <select id="filter" onchange="render()">
+      <option value="all">All</option>
+      <option value="new">New only</option>
+      <option value="done">Fulfilled</option>
+    </select>
+    <button class="btn btn-ghost btn-sm" onclick="load()">Refresh</button>
+  </div>
+  <div id="list"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://toupkukbypqoupdcogkc.supabase.co';
+const SUPABASE_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRvdXBrdWtieXBxb3VwZGNvZ2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyNzIzMjEsImV4cCI6MjA5ODg0ODMyMX0.nkG2RTXqS8mTrAuD8-gMWANOIRZdGl-MD3uYTMI2mxQ';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+let ORDERS = [];
+
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function money(n){ return (Number(n)||0).toFixed(2); }
+function fmtDate(s){ if(!s) return ''; const d=new Date(s); return d.toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}); }
+
+async function checkSession(){
+  const { data } = await sb.auth.getSession();
+  if(data.session){ showDash(); load(); }
+  else { document.getElementById('loginView').style.display='block'; }
+}
+function showDash(){
+  document.getElementById('loginView').style.display='none';
+  document.getElementById('dashView').style.display='block';
+}
+async function doLogin(){
+  const email=document.getElementById('email').value.trim();
+  const password=document.getElementById('password').value;
+  const errEl=document.getElementById('loginErr'); errEl.textContent='';
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  if(error){ errEl.textContent=error.message; return; }
+  showDash(); load();
+}
+async function doLogout(){ await sb.auth.signOut(); location.reload(); }
+
+async function load(){
+  const { data, error } = await sb.from('orders').select('*').order('created_at',{ascending:false});
+  if(error){ document.getElementById('list').innerHTML='<div class="empty">'+esc(error.message)+'</div>'; return; }
+  ORDERS = data||[];
+  render();
+}
+
+function itemsHtml(items){
+  if(!Array.isArray(items)) return '';
+  return '<div class="items">'+items.map(i=>
+    '<div class="it"><span>'+esc(i.qty)+'× '+esc(i.name)+'</span><span>'+money(i.priceEUR*i.qty)+' EUR</span></div>'
+  ).join('')+'</div>';
+}
+
+function orderHtml(o){
+  return '<div class="order '+(o.status==='done'?'done':'')+'">'+
+    '<div class="order-head"><div>'+
+      '<div class="who">'+esc(o.recipient_name||'—')+
+        '<span class="status '+(o.status==='done'?'done':'new')+'">'+(o.status==='done'?'Fulfilled':'New')+'</span></div>'+
+      '<div class="when">'+fmtDate(o.created_at)+' · from '+esc(o.sender_name||'')+'</div>'+
+    '</div><div class="total">'+money(o.total)+' EUR</div></div>'+
+    '<div class="grid">'+
+      '<div><div class="k">Deliver to</div>'+esc(o.recipient_name)+' · '+esc(o.recipient_phone)+'<br>'+esc(o.recipient_address)+'</div>'+
+      '<div><div class="k">Delivery</div>'+esc(o.delivery_type)+(o.delivery_date&&o.delivery_date!=='Today'?' · '+esc(o.delivery_date):'')+'</div>'+
+      '<div><div class="k">From (sender)</div>'+esc(o.sender_name)+' · '+esc(o.sender_email)+'<br>'+esc(o.sender_phone)+' · '+esc(o.sender_country)+'</div>'+
+      '<div><div class="k">Card message</div>'+(esc(o.card_message)||'<span style="color:#a49a8d">—</span>')+'</div>'+
+      (o.special_instructions?'<div style="grid-column:1/-1"><div class="k">Instructions</div>'+esc(o.special_instructions)+'</div>':'')+
+      '<div style="grid-column:1/-1"><div class="k">PayPal</div>'+esc(o.paypal_order_id||'—')+'</div>'+
+    '</div>'+
+    itemsHtml(o.items)+
+    '<div class="order-actions">'+
+      (o.status==='done'
+        ? '<button class="btn btn-ghost btn-sm" onclick="mark(\''+o.id+'\',\'new\')">Reopen</button>'
+        : '<button class="btn btn-sm" onclick="mark(\''+o.id+'\',\'done\')">Mark fulfilled</button>')+
+    '</div>'+
+  '</div>';
+}
+
+function render(){
+  const q=(document.getElementById('search').value||'').toLowerCase();
+  const f=document.getElementById('filter').value;
+  let rows=ORDERS;
+  if(f!=='all') rows=rows.filter(o=>(o.status||'new')===f);
+  if(q) rows=rows.filter(o=>JSON.stringify([o.recipient_name,o.sender_name,o.recipient_phone,o.sender_phone,o.sender_email]).toLowerCase().includes(q));
+  const newCount=ORDERS.filter(o=>(o.status||'new')==='new').length;
+  document.getElementById('stats').textContent=ORDERS.length+' orders · '+newCount+' new';
+  document.getElementById('list').innerHTML = rows.length ? rows.map(orderHtml).join('') : '<div class="empty">No orders yet.</div>';
+}
+
+async function mark(id, status){
+  const { error } = await sb.from('orders').update({ status }).eq('id', id);
+  if(error){ alert(error.message); return; }
+  const o=ORDERS.find(x=>x.id===id); if(o) o.status=status;
+  render();
+}
+
+checkSession();
+</script>
+</body>
+</html>

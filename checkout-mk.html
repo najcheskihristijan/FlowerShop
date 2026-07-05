@@ -489,7 +489,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
 
 <!-- Header -->
 <div class="header">
-  <a href="index-mk.html" class="logo">flowers <span>&</span> coffee</a>
+  <a href="/" class="logo" aria-label="Flowershop.mk"><img class="site-logo" src="/images/logo.webp" alt="Flowershop.mk" width="688" height="300"></a>
   <a href="index-mk.html" class="back-link">&larr; Продолжи со купување</a>
 </div>
 
@@ -654,6 +654,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
 </div>
 
 <!-- PayPal SDK (Live, EUR currency) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://www.paypal.com/sdk/js?client-id=AczifDy55R3yxUPXlBd6faeFBMxxFJo06dJLxCKWIMfk7WK5DcQgeSDK_ulfgD6iUbzHIU0DcCWqVs7-&currency=EUR&intent=capture"></script>
 
 <script>
@@ -828,6 +829,27 @@ function getFormData() {
    PAYPAL INTEGRATION
    ============================================ */
 
+/* ---- save each paid order to Supabase ---- */
+const SUPABASE_URL='https://toupkukbypqoupdcogkc.supabase.co';
+const SUPABASE_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRvdXBrdWtieXBxb3VwZGNvZ2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyNzIzMjEsImV4cCI6MjA5ODg0ODMyMX0.nkG2RTXqS8mTrAuD8-gMWANOIRZdGl-MD3uYTMI2mxQ';
+let _supa = null;
+function _sbClient(){ if(!_supa && window.supabase && window.supabase.createClient){ _supa = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON); } return _supa; }
+async function saveOrder(o, paypalId){
+  const c = _sbClient();
+  if(!c){ console.warn('supabase not loaded'); return; }
+  try{
+    const { error } = await c.from('orders').insert({
+      paypal_order_id: paypalId, status: 'new',
+      sender_name:o.sender.name, sender_email:o.sender.email, sender_phone:o.sender.phone, sender_country:o.sender.country,
+      recipient_name:o.recipient.name, recipient_phone:o.recipient.phone, recipient_address:o.recipient.address,
+      delivery_type:o.delivery.type, delivery_date:o.delivery.date,
+      card_message:o.cardMessage, special_instructions:o.specialInstructions,
+      items:o.items, subtotal:o.subtotal, delivery_fee:o.deliveryFee, total:o.total, currency:'EUR'
+    });
+    if(error) console.error('saveOrder error', error);
+  }catch(e){ console.error('saveOrder failed', e); }
+}
+
 function initPayPal() {
   if (cart.length === 0) return;
 
@@ -864,7 +886,7 @@ function initPayPal() {
               shipping: { value: orderData.deliveryFee.toFixed(2), currency_code: 'EUR' }
             }
           },
-          description: 'Flowershop.mk Prilep — ' + description,
+          description: ('Flowershop.mk Prilep \u2014 ' + description).slice(0, 120),
           items: orderData.items.map(item => ({
             name: item.name,
             unit_amount: { value: item.priceEUR.toFixed(2), currency_code: 'EUR' },
@@ -878,18 +900,7 @@ function initPayPal() {
               admin_area_2: 'Prilep',
               country_code: 'MK'
             }
-          },
-          custom_id: JSON.stringify({
-            recipientPhone: orderData.recipient.phone,
-            cardMessage: orderData.cardMessage,
-            deliveryType: orderData.delivery.type,
-            deliveryDate: orderData.delivery.date,
-            specialInstructions: orderData.specialInstructions,
-            senderName: orderData.sender.name,
-            senderEmail: orderData.sender.email,
-            senderPhone: orderData.sender.phone,
-            senderCountry: orderData.sender.country
-          })
+          }
         }]
       });
     },
@@ -899,6 +910,7 @@ function initPayPal() {
       return actions.order.capture().then(function(details) {
         // Payment successful!
         const orderData = getFormData();
+        saveOrder(orderData, data.orderID);
         const orderId = 'FC-' + data.orderID.slice(-8).toUpperCase();
 
         // Show confirmation
