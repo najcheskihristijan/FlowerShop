@@ -987,7 +987,12 @@ p,.hero-text,.trust-item p,.product-desc{font-weight:300}
 .header .header-actions{order:3;justify-self:end}
 .nav a{font-family:'Manrope',sans-serif;font-size:.72rem;text-transform:uppercase;letter-spacing:2px;color:var(--ink);font-weight:400}
 .nav a:hover{color:var(--text-light)}
-.header-actions a .icon{stroke:var(--ink)}
+.header-actions{display:flex;align-items:center;gap:1.25rem}
+.header-actions a .icon,.header-actions .icon{width:27px;height:27px;stroke:var(--ink)}
+.header-actions .lang-switch{display:flex;align-items:center;gap:.15rem;font-family:'Manrope',sans-serif;font-size:.76rem;letter-spacing:1px}
+.header-actions .lang-switch a{color:var(--text-lighter);padding:.1rem .28rem;border-radius:3px}
+.header-actions .lang-switch a.active{color:var(--ink);font-weight:600}
+.header-actions .lang-switch a:hover{color:var(--ink)}
 /* official logo (SVG-extracted WebP) */
 .logo{display:inline-flex;align-items:center;text-decoration:none;line-height:1}
 .site-logo{height:36px;width:auto;display:block}
@@ -1006,7 +1011,7 @@ p,.hero-text,.trust-item p,.product-desc{font-weight:300}
 .hero-text{color:var(--text-light);max-width:400px}
 .hero-note{margin-top:1.1rem;font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-light)}
 .hero-content::before{content:'';display:block;width:56px;height:1px;background:var(--ink);opacity:.55;margin:0 0 1.4rem}
-.hero-photo-static{border-radius:2px;box-shadow:0 30px 60px rgba(70,55,40,.16)}
+.hero-photo-static{border-radius:2px;box-shadow:0 30px 60px rgba(70,55,40,.16);object-position:68% center}
 /* trust bar */
 .trust-bar{background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .trust-item h4{font-family:'Manrope',sans-serif;text-transform:uppercase;letter-spacing:1.5px;font-size:.72rem;font-weight:500;color:var(--ink)}
