@@ -1966,7 +1966,13 @@ p,.hero-text,.trust-item p,.product-desc{font-weight:300}
   .header .nav{display:none}
   .header .logo{order:1;justify-self:start}
   .header .header-actions{order:2}
-  .hero-title{font-size:2.8rem}
+  /* mobile hero: stack full image on top, text below on cream (no overlay) */
+  .hero{display:block;min-height:0}
+  .hero-bg{position:relative;inset:auto;width:100%;height:auto;object-fit:contain}
+  .hero::after{display:none}
+  .hero-content{max-width:none;padding:2rem 0 1.5rem}
+  .hero-title{font-size:2.6rem}
+  .hero-content::before{margin:0 0 1.1rem}
 }
 </style>
 </body>
