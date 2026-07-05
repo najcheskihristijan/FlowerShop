@@ -1094,6 +1094,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
 
 <!-- ==================== HERO ==================== -->
 <section class="hero" id="hero">
+  <img class="hero-bg" src="/images/hero-flowershop-branded-prilep.webp" alt="Elegant bouquet of cream and blush roses with eucalyptus — flower delivery in Prilep">
   <div class="hero-sticky">
     <div class="container">
       <div class="hero-content">
@@ -1102,10 +1103,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
       <a href="#shop" class="btn btn-pink">Shop Now &amp; Pay Online</a>
       <p class="hero-note">Currently delivering across Prilep.</p>
     </div>
-      <div class="hero-visual">
-        <img class="hero-photo-static" src="/images/hero-flowershop-branded-prilep.webp" alt="Elegant bouquet of cream and blush roses with eucalyptus — flower delivery in Prilep" width="520" height="420">
-        <canvas class="hero-rose-canvas" width="560" height="996" aria-hidden="true"></canvas>
-      </div>
+      <canvas class="hero-rose-canvas" width="560" height="996" aria-hidden="true"></canvas>
     </div>
   </div>
 </section>
@@ -1886,10 +1884,11 @@ p,.hero-text,.trust-item p,.product-desc{font-weight:300}
 .nav a:hover{color:var(--text-light)}
 .header-actions{display:flex;align-items:center;gap:1.25rem}
 .header-actions a .icon,.header-actions .icon{width:27px;height:27px;stroke:var(--ink)}
-.header-actions .lang-switch{display:flex;align-items:center;gap:.15rem;font-family:'Manrope',sans-serif;font-size:.76rem;letter-spacing:1px}
-.header-actions .lang-switch a{color:var(--text-lighter);padding:.1rem .28rem;border-radius:3px}
-.header-actions .lang-switch a.active{color:var(--ink);font-weight:600}
+.header-actions .lang-switch{display:flex;align-items:center;gap:.3rem;font-family:'Manrope',sans-serif;font-size:.72rem;letter-spacing:1px}
+.header-actions .lang-switch a{color:var(--text-lighter);padding:.3rem .55rem;border-radius:5px;line-height:1}
+.header-actions .lang-switch a.active{background:var(--ink);color:#fff;font-weight:600}
 .header-actions .lang-switch a:hover{color:var(--ink)}
+.header-actions .lang-switch a.active:hover{color:#fff}
 /* official logo (SVG-extracted WebP) */
 .logo{display:inline-flex;align-items:center;text-decoration:none;line-height:1}
 .site-logo{height:36px;width:auto;display:block}
@@ -1901,8 +1900,13 @@ p,.hero-text,.trust-item p,.product-desc{font-weight:300}
 .btn-pink:hover,.action-btn:hover,.add-to-cart-btn:hover{background:#000;color:#fff;box-shadow:none;transform:translateY(-1px)}
 .btn-outline{background:transparent;color:var(--ink);border:1px solid var(--ink)}
 .btn-outline:hover{background:var(--ink);color:var(--cream)}
-/* hero */
-.hero{background:var(--beige)}
+/* hero — full-bleed image with text overlaid left */
+.hero{position:relative;overflow:hidden;background:var(--beige);min-height:560px;padding:0;display:flex;align-items:center}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center right;z-index:0;display:block}
+.hero::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(247,244,238,.95) 0%,rgba(247,244,238,.62) 36%,rgba(247,244,238,0) 60%)}
+.hero-sticky{position:relative;z-index:2;width:100%}
+.hero .container{position:relative;z-index:2}
+.hero-content{max-width:520px;padding:4rem 0}
 .hero-title{font-size:4rem;color:var(--ink);line-height:1.06}
 .hero-title em{font-style:italic;color:var(--ink)}
 .hero-text{color:var(--text-light);max-width:400px}
@@ -1940,6 +1944,12 @@ p,.hero-text,.trust-item p,.product-desc{font-weight:300}
 .feature-visual svg{width:66px;height:66px}
 .deal-visual{color:var(--cream);display:flex;align-items:center;justify-content:center;gap:1.1rem}
 .deal-visual svg{width:46px;height:46px}
+/* deal banner (dark) legibility */
+.deal-content .deal-label{color:#cdbaa7}
+.deal-content h2{color:#fff}
+.deal-content p{color:rgba(255,255,255,.8);opacity:1}
+.deal-card .btn,.deal-card .btn-pink{background:var(--cream);color:var(--ink)}
+.deal-card .btn-pink:hover{background:#fff;color:var(--ink)}
 /* cart */
 .cart-count{background:var(--ink);color:var(--cream)}
 .qty-btn:hover{border-color:var(--ink);color:var(--ink)}
